@@ -1,0 +1,763 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Skypay</title>
+
+    <!-- Данное значение часто используют поисковые системы, заполняем ответственно -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Адаптируем страницу для мобильных устройств -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Традиционная иконка сайта, размер 16x16, прозрачность поддерживается. Рекомендуемый формат: .ico -->
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <!-- Иконка сайта для устройств от Apple, рекомендуемый размер 114x114, прозрачность не поддерживается -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <!-- Подключаем шрифт с https://fonts.google.com -->
+    <!-- Подключаем файлы стилей -->
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/dist/css/style.min.css" />
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container">
+
+            <div class="row">
+
+                <a href="/" class="logo col-md-2 col-sm-3">
+                    <img src="~/dist/img/logo.png" alt="Лого">
+                </a>
+
+                <nav class="col-md-7 col-sm-6">
+
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <ul class="navbar-collapse collapse">
+                        <li><a href="#">Возможности</a></li>
+                        <li class="active"><a href="#">Тарифы</a></li>
+                        <li><a href="#">Преимущества</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                        <li><a href="#">Полезное</a></li>
+                    </ul>
+                </nav>
+
+                <div class="col-md-3 col-sm-3">
+                    <i class="icon-user2"></i>
+                    <!-- registration -->
+                    <div id="registration" class="registration">
+
+                        <div id="enter">
+
+                            <div class="text-h">Личный кабинет</div>
+                            <h3 class="h3">Вход</h3>
+
+                            <form action="">
+
+                                <a onclick="closeWin()" data-action="close" href="#registration" class="close">&times;</a>
+
+                                <input class="email" type="email" placeholder="Ваш E-Mail" />
+
+                                <input class="password" type="password" placeholder="Ваш Пароль" />
+
+                                <a href="javascript:void(0);" class="link-reg pull-left">Регистрация</a>
+
+                                <a href="#" class="link-reg pull-right">Забыли пароль ?</a>
+
+                                <div class="clearfix"></div>
+
+                                <button class="btn-black-blue">Вход</button>
+
+                                <div class="text-h">Вход через социальные сети:</div>
+
+                                <div class="social-wrap">
+
+                                    <a class="social" href=""><i class="fa fa-facebook"></i></a>
+                                    <a class="social" href=""><i class="fa fa-vk"></i></a>
+                                    <a class="social" href=""><i class="fa fa-odnoklassniki"></i></a>
+                                    <a class="social" href=""><i class="fa fa-twitter"></i></a>
+                                    <a class="social" href=""><i class="fa fa-yandex-big"></i></a>
+
+                                </div>
+
+                                <div class="checkboxing">
+
+                                    <input type="checkbox" id="checkbox-1-1" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-1">Я ознакомился с <a href="#">договором оферты</a> </label>
+
+                                    <input type="checkbox" id="checkbox-1-2" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-2">
+                                        Я ознакомился с<br>
+                                        <a href="#">положением об обработке данных</a>
+                                    </label>
+
+                                    <input type="checkbox" id="checkbox-1-3" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-3">Я согласен с получением <br> системных сообщений</label>
+
+                                </div>
+
+                                <button class="btn-black-blue">Вход</button>
+
+                            </form>
+
+                        </div>
+                        <div id="reg" class="reg">
+
+                            <div class="text-h">Личный кабинет</div>
+                            <h3 class="h3">РЕГИСТРАЦИЯ</h3>
+
+                            <form action="">
+
+                                <a onclick="closeWin()" data-action="close" href="#registration" class="close">&times;</a>
+
+
+                                <input class="fio" type="text" placeholder="ФИО">
+
+                                <input class="tel" type="text" placeholder="Ваш телефон">
+
+                                <input class="email" type="email" placeholder="Ваш E-Mail" />
+
+                                <input class="password" type="password" placeholder="Ваш Пароль" />
+                                <input class="password" type="password" placeholder="Ваш Пароль ещё раз" />
+
+
+                                <div class="checkboxing">
+
+                                    <input type="checkbox" id="checkbox-1-1" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-1">Я ознакомился с <a href="#">договором оферты</a> </label>
+
+                                    <input type="checkbox" id="checkbox-1-2" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-2">
+                                        Я ознакомился с<br>
+                                        <a href="#">положением об обработке данных</a>
+                                    </label>
+
+                                    <input type="checkbox" id="checkbox-1-3" class="regular-checkbox" checked="">
+                                    <label class="label_checkbox" for="checkbox-1-3">Я согласен с получением <br> системных сообщений</label>
+
+                                </div>
+
+                                <button class="btn-black-blue">Вход</button>
+
+                            </form>
+
+                        </div>
+
+                    </div> <!-- registration -->
+
+                    <a href="tel:8 800 *** ** **" class="tel">
+                        8 800 *** ** **
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="main-block">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <h2 class="h2">Продажи, Склад, Управление Задачами</h2>
+                    <h1 class="h1">в облаке</h1>
+
+                </div>
+
+            </div>
+
+            <div class="main-tet-line">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="red-text">
+
+                            Все что нужно в одной системе: Закупки, Продажи, Склад, Финансы, Клиенты и Поставщики.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="container pad">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="wrap-main-item wrap-main-item-1">
+
+                            <h4 class="h4">Быстро</h4>
+
+                            <div class="text">
+                                Продукт не требует внедрения и доступен после регистрации
+                            </div>
+
+                        </div>
+
+                        <div class="wrap-main-item wrap-main-item-2">
+
+                            <h4 class="h4">Просто</h4>
+
+                            <div class="text">
+                                Вы и Ваши сотрудники освоят систему за несколько часов
+                            </div>
+
+                        </div>
+
+                        <div class="wrap-main-item wrap-main-item-3">
+
+                            <h4 class="h4">Доступно</h4>
+
+                            <div class="text">
+                                Бесплатная пробная версия для начинающих. Гибкая тарификация
+                            </div>
+
+                        </div>
+
+                        <div class="wrap-main-item wrap-main-item-4">
+
+                            <h4 class="h4">Всегда доступно</h4>
+
+                            <div class="text">
+                                Доступ с любого устройства. Нужен только интернет
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="wrap-logo-bottom">
+
+                            <div class="wrap-logo-text">
+
+                                <span>SkyPay</span>  – онлайн сервис автоматизации торговли
+
+                            </div>
+
+                            <a href="~/Manage" class="btn btn-header">НАЧАТЬ ИСПОЛЬЗОВАТЬ</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- OPPORTUNITY -->
+    <section class="opportunity">
+
+        <div class="container">
+
+            <div class="row">
+
+                <h3 class="h3">Вам доступны все возможности управления предприятием</h3>
+
+                <div class="icon-opportunity">
+
+                    <div class="icon-item-opportunity">
+
+                        <i class="border-icon border-icon-1"> </i>
+
+                        <div class="h-text">
+                            Розничная <br>
+                            торговля
+                        </div>
+
+
+                    </div> <!-- icon-item-opportunity -->
+
+                    <div class="icon-item-opportunity">
+
+                        <i class="border-icon border-icon-2"> </i>
+
+                        <div class="h-text">
+                            Интернет<br>
+                            Магазин
+                        </div>
+
+
+                    </div> <!-- icon-item-opportunity -->
+
+                    <div class="icon-item-opportunity">
+
+                        <i class="border-icon border-icon-3"> </i>
+
+                        <div class="h-text">
+                            Оптовая<br>
+                            торговля
+                        </div>
+
+
+                    </div> <!-- icon-item-opportunity -->
+
+                    <div class="icon-item-opportunity">
+
+                        <i class="border-icon border-icon-4"> </i>
+
+                        <div class="h-text">
+                            Туристическое<br>
+                            агентство
+                        </div>
+
+
+                    </div> <!-- icon-item-opportunity -->
+
+                    <div class="icon-item-opportunity">
+
+                        <i class="border-icon border-icon-5"> </i>
+
+                        <div class="h-text">
+                            Производство
+                        </div>
+
+
+                    </div> <!-- icon-item-opportunity -->
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="wrap-opportunity">
+
+                        <i class="opportunity-icon opportunity-icon-1"></i>
+
+                        <h5 class="h5">Рабочее место кассира</h5>
+
+                        <div class="text">
+                            Полное соответствие требованиям 54-ФЗ, поддержка ЕГАИС. Простой и удобный интерфейс. Регистрация продаж, расчет сдачи, возврат товара. Смешанная оплата: наличные+карта+бонусы. Печать ценников, товарных и кассовых чеков. Офлайн режим, на случай отсутствия интернета.
+                        </div>
+
+                    </div>
+
+                    <div class="wrap-opportunity">
+
+                        <i class="opportunity-icon opportunity-icon-3"></i>
+
+                        <h5 class="h5">Товароучетная система</h5>
+
+                        <div class="text">
+                            Управление любым количеством торговых точек. Контроль за размером сдаваемой выручки, статистика продаж в разрезе торговых точек. Аналитические отчеты и работа с ассортиментом. Управление ценами. Инвентаризации. Комиссионная торговля. Все возможности складского учета. Импорт из Excel прайс-листов и накладных поставщиков.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="wrap-opportunity">
+
+                        <i class="opportunity-icon opportunity-icon-2"></i>
+
+                        <h5 class="h5">Совместимость с оборудованием</h5>
+
+                        <div class="text">
+                            Поддержка сканеров штрих кодов. Печать и генерация EAN-8, EAN-13, Code128 и др.
+                            Подключение фискального регистратора или принтера чеков, в том числе с поддержкой последних моделей подготовленными по 54-ФЗ.
+                        </div>
+
+                    </div>
+
+                    <div class="wrap-opportunity">
+
+                        <i class="opportunity-icon opportunity-icon-4"></i>
+
+                        <h5 class="h5">Закупки и складской учет</h5>
+
+                        <div class="text">
+                            Остатки: фактические и с учетом резерва. Характеристики товара, штрих-коды и серийные номера. Импорт накладных и прайс-листов поставщиков из Excel. История закупок по товару и по контрагенту. Работа с комиссионным товаром. Планирование закупок: создание заказов поставщикам из заказов покупателей, автоматическое пополнение склада до неснижаемого остатка.
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <a href="~/Manage" class="btn-look">Посмотреть все возможности <span>SkyPay</span> </a>
+                @*@Html.ActionLink("Spa", "Index", "Manage")*@
+            </div>
+
+        </div>
+
+    </section>
+    <!--END OPPORTUNITY -->
+    <!-- BUSINESS -->
+    <section class="business-block">
+
+        <div class="container">
+
+            <h2 class="h2">
+                <span>Занимайтесь бизнесом</span> <br>
+                там, <br>
+                где вам удобно
+            </h2>
+
+
+            <div class="text">
+                Для удобства мобильные приложения под IOS и Android
+            </div>
+
+
+            <a class="app" href="#">
+                <img src="~/dist/img/google.png" alt="">
+            </a>
+
+            <a class="app" href="#">
+                <img src="~/dist/img/app.png" alt="">
+            </a>
+
+        </div>
+
+    </section>
+    <!--END BUSINESS -->
+    <!-- BTN -->
+    <div class="bg-btn">
+
+        <div class="container">
+
+            <div class="row">
+
+                <a href="javascript:void(0);" class="btn-look">Посмотреть все преимущества</a>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- BTN -->
+    <!-- SALE -->
+    <section class="sale">
+
+        <div class="container">
+
+            <div class="row">
+
+                <h3>Акции и новости</h3>
+
+                <div class="wrap-sale">
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale"></i>
+
+                        <a href="#" class="text-h">Внимание <br> Акция !!!</a>
+
+                        <div class="text-sale">
+                            Только до 15 марта. Оплатите SkyPay на год — получите подключение к ОФД на год в подарок! Если вы еще не пользуетесь SkyPay на платном тарифе, начните на очень выгодных условиях. При оплате годовой подписки на SkyPay по любому тарифному плану, мы дарим годовое подключение к ОФД для каждой оплаченной с тарифом Розничной точки. Если вы еще не пользуетесь SkyPay на платном тарифе, начните на очень выгодных условиях ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale icon-graphic"></i>
+
+                        <a href="#" class="text-h">
+                            Графики в отчете  <br>
+                            Прибыльность
+                        </a>
+
+                        <div class="text-sale">
+                            В отчете Прибыльность появились графики. Выбираем период — месяц, неделя, день, даже час — и смотрим количество продаж, выручку, прибыль и возвраты в динамике. В графиках также есть возможность сравнивать показатели с прошлым годом или любым другим периодом. Вам больше не надо вручную собирать показатели для отчета, например, годового, чтобы посмотреть динамику продаж или выручки по месяцам. Просто торгуйте ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale"></i>
+
+                        <a href="#" class="text-h">
+                            Графики в отчете <br>
+                            Прибыльность
+                        </a>
+
+                        <div class="text-sale">
+                            В отчете Прибыльность появились графики. Выбираем период — месяц, неделя, день, даже час — и смотрим количество продаж, выручку, прибыль и возвраты в динамике. В графиках также есть возможность сравнивать показатели с прошлым годом или любым другим периодом. Вам больше не надо вручную собирать показатели для отчета, например, годового, чтобы посмотреть динамику продаж или выручки по месяцам. Просто торгуйте ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale"></i>
+
+                        <a href="#" class="text-h">
+                            Графики в отчете <br>
+                            Прибыльность
+                        </a>
+
+                        <div class="text-sale">
+                            В отчете Прибыльность появились графики. Выбираем период — месяц, неделя, день, даже час — и смотрим количество продаж, выручку, прибыль и возвраты в динамике. В графиках также есть возможность сравнивать показатели с прошлым годом или любым другим периодом. Вам больше не надо вручную собирать показатели для отчета, например, годового, чтобы посмотреть динамику продаж или выручки по месяцам. Просто торгуйте ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale"></i>
+
+                        <a href="#" class="text-h">
+                            Графики в отчете <br>
+                            Прибыльность
+                        </a>
+
+                        <div class="text-sale">
+                            В отчете Прибыльность появились графики. Выбираем период — месяц, неделя, день, даже час — и смотрим количество продаж, выручку, прибыль и возвраты в динамике. В графиках также есть возможность сравнивать показатели с прошлым годом или любым другим периодом. Вам больше не надо вручную собирать показатели для отчета, например, годового, чтобы посмотреть динамику продаж или выручки по месяцам. Просто торгуйте ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                    <div class="sale-item">
+
+                        <i class="icon-sale"></i>
+
+                        <a href="#" class="text-h">Внимание <br> Акция !!!</a>
+
+                        <div class="text-sale">
+                            Только до 15 марта. Оплатите SkyPay на год — получите подключение к ОФД на год в подарок! Если вы еще не пользуетесь SkyPay на платном тарифе, начните на очень выгодных условиях. При оплате годовой подписки на SkyPay по любому тарифному плану, мы дарим годовое подключение к ОФД для каждой оплаченной с тарифом Розничной точки. Если вы еще не пользуетесь SkyPay на платном тарифе, начните на очень выгодных условиях ...
+                        </div>
+
+                    </div> <!-- sale-item -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!--END SALE -->
+    <!-- SERTIFICATION -->
+    <section class="sertification">
+
+        <div class="container">
+
+            <div class="row">
+
+                <h3 class="h3">Акции и новости</h3>
+
+                <div class="wrap-sertification">
+
+                    <div class="sertification-item">
+
+                        <div class="text-h">Благодарность от Google</div>
+
+                        <a href="~/dist/img/sertification.png" data-fancybox="images" class="wrap-img-sertification">
+
+                            <img src="~/dist/img/sertification.png" alt="">
+
+                        </a>
+
+                    </div> <!-- sertification-item -->
+
+                    <div class="sertification-item">
+
+                        <div class="text-h">Благодарность от Google</div>
+
+                        <a href="~/dist/img/sertification.png" data-fancybox="images" class="wrap-img-sertification">
+
+                            <img src="~/dist/img/sertification.png" alt="">
+
+                        </a>
+
+                    </div> <!-- sertification-item -->
+
+                    <div class="sertification-item">
+
+                        <div class="text-h">Благодарность от Google</div>
+
+                        <a href="~/dist/img/sertification.png" data-fancybox="images" class="wrap-img-sertification">
+
+                            <img src="~/dist/img/sertification.png" alt="">
+
+                        </a>
+
+                    </div> <!-- sertification-item -->
+
+                    <div class="sertification-item">
+
+                        <div class="text-h">Благодарность от Google</div>
+
+                        <a href="~/dist/img/sertification.png" data-fancybox="images" class="wrap-img-sertification">
+
+                            <img src="~/dist/img/sertification.png" alt="">
+
+                        </a>
+
+                    </div> <!-- sertification-item -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!--END SERTIFICATION -->
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="line-sky">
+
+                    <img src="~/dist/img/logo-line.png" alt="">
+
+                </div>
+
+                <div class="col-md-2 wrap-footer-line-item">
+
+                    <h5 class="h5">Возможности</h5>
+
+                    <ul>
+                        <li><a href="#">Возможность1</a></li>
+                        <li><a href="#">Возможность2</a></li>
+                        <li><a href="#">Возможность3</a></li>
+                        <li><a href="#">Возможность4</a></li>
+                        <li><a href="#">Возможность5</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-1 wrap-footer-line-item">
+
+                    <h5 class="h5">Тарифы</h5>
+
+                    <ul>
+                        <li><a href="#">Тарифы1</a></li>
+                        <li><a href="#">Тарифы2</a></li>
+                        <li><a href="#">Тарифы3</a></li>
+                        <li><a href="#">Тарифы4</a></li>
+                        <li><a href="#">Тарифы5</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-2 wrap-footer-line-item">
+
+                    <h5 class="h5">Преимущества</h5>
+
+                    <ul>
+                        <li><a href="#">Преимущества1</a></li>
+                        <li><a href="#">Преимущества2</a></li>
+                        <li><a href="#">Преимущества3</a></li>
+                        <li><a href="#">Преимущества4</a></li>
+                        <li><a href="#">Преимущества5</a></li>
+                        <li><a href="#">Преимущества6</a></li>
+                        <li><a href="#">Преимущества7</a></li>
+                        <li><a href="#">Преимущества8</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-2 wrap-footer-line-item">
+
+                    <h5 class="h5">Поддержка</h5>
+
+                    <ul>
+                        <li><a href="#">Поддержка1</a></li>
+                        <li><a href="#">Поддержка2</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-2 wrap-footer-line-item">
+
+                    <h5 class="h5">Полезное</h5>
+
+                    <ul>
+                        <li><a href="#">Полезное1</a></li>
+                        <li><a href="#">Полезное2</a></li>
+                        <li><a href="#">Полезное3</a></li>
+                        <li><a href="#">Полезное4</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-md-3 wrap-footer-line-item">
+
+                    <div class="width">
+
+                        <a class="social" href=""><i class="fa fa-facebook"></i></a>
+                        <a class="social" href=""><i class="fa fa-vk"></i></a>
+                        <a class="social" href=""><i class="fa fa-odnoklassniki"></i></a>
+                        <a class="social" href=""><i class="fa fa-twitter"></i></a>
+                        <a class="social" href=""><i class="fa fa-google-plus"></i></a>
+                        <a class="social" href=""><i class="fa fa-youtube"></i></a>
+                        <a class="social" href=""><i class="fa fa-yandex"></i></a>
+                        <a class="social" href=""><i class="fa fa-at"></i></a>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <a class="tel" href="tel:8 800 *** ** **">8 800 *** ** **</a>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="copyright">
+
+                    <div class="copy pull-left">© 2017 ООО «SkyPay»</div>
+
+                    <div class="copy-right pull-right" style="display:none">
+                        сделано в:
+                        <a href="http://f-t.com.ru/"><img src="~/dist/img/copyright.png" alt=""></a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <!--END FOOTER -->
+    <!-- Скрипты -->
+    <script type="text/javascript" src="~/dist/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/dist/js/plugins.min.js"></script>
+    <script type="text/javascript" src="~/dist/js/scripts.js"></script>
+</body>
+</html>
+
+
+
+
+
+@*@{ ViewData["Title"] = "Home Page"; }*@
+@*<h2>Index</h2>*@
+@*<div id="app"></div>
+    
+@section scripts {
+    <script src="~/dist/main.js" asp-append-version="true"></script>
+}*@
+
