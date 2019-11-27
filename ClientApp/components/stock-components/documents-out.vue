@@ -8,26 +8,14 @@
                     </q-btn>
                 </div>
                 <div class="col-3">
-                    <!--<q-select v-model="viewType" stack-label="Показывать:"
-                      color="skypay-primary"
-                      @change="changeViewType"
-                      :options="viewTypes" />-->
                 </div>
                 <div class="col"></div>
                 <div class="col-5" style="padding-top:11px">
-                    <!--<q-search color="skypay-primary"
-                      @keyup="keyUpSearch"
-                      @change="changeSearch"
-                      placeholder="Поиск"
-                      v-model="agentsearch" />-->
                 </div>
             </div>
             <q-data-table :data="documents"
                           :config="config"
                           :columns="columns" class="tav">
-                <!--<template slot="col-Private" slot-scope="cell">
-                    <q-checkbox v-model="cell.data"  color="skypay-primary" />
-                </template>-->
                 <template slot="col-lock" slot-scope="cell">
                     <q-btn v-if="!cell.data.locked" color="skypay-primary" flat small round @click="editDocument(cell.data.Id)">
                         <q-icon name="edit" size="18px" />
@@ -42,11 +30,6 @@
                         <q-icon name="lock_open" size="18px" />
                     </q-btn>
                     <q-icon v-else name="lock" style="margin:0 11px;" color="skypay-primary" size="18px" />
-                    <!--<q-btn color="skypay-primary" flat small round @click="editAgent(cell.data)">
-                        <q-icon name="edit" size="18px" />
-                    </q-btn>
-                    -->
-
                 </template>
             </q-data-table>
             <q-inner-loading :visible="tvisible">
@@ -64,24 +47,15 @@
                             <q-select v-model="agent" float-label="Покупатель" :error="$v.agent.$error"
                                       color="skypay-primary" @change="changeAgent"
                                       :options="agents" />
-                            <!--<q-field>
-
-                                <q-input v-model="selectedAgent.nds" readonly stack-label="НДС(%)" color="skypay-primary" />
-                            </q-field>
-                            <q-field>
-
-                                <q-input v-model="selectedDocument.makrkup" @blur="$v.selectedDocument.makrkup.$touch" :error="$v.selectedDocument.makrkup.$error" float-label="Наценка(%)" color="skypay-primary" />
-                            </q-field>-->
                         </div>
                         <div class="col-5" style="padding:10px">
                             <q-btn color="skypay-secondary" flat @click="changePrivate" label="Close">
                                 <q-icon v-if="private" name="done" />
                                 <span>&nbsp;Частное лицо</span>
                             </q-btn>
-                            <!--<q-checkbox v-model="private" color="skypay-primary" />-->
                         </div>
                     </div>
-                  
+
                 </div>
                 <div>
                     <q-btn color="skypay-secondary" @click="saveDoc" label="Close">
@@ -91,9 +65,6 @@
                         Отмена
                     </q-btn>
                 </div>
-                <!--<q-inner-loading :visible="docvisible">
-                    <q-spinner-mat size="50px" color="skypay-primary"></q-spinner-mat>
-                </q-inner-loading>-->
             </div>
         </q-modal>
         <q-modal v-model="showItems">
@@ -119,10 +90,6 @@
                                     <q-fab v-if="canEditItems" color="skypay-primary" flat small class="pull-right" style="margin-top:-10px!important"
                                            icon="more_horiz"
                                            direction="left">
-                                        <!--<q-fab-action color="skypay-primary"
-                                                   @click=""
-                                                  icon="add" />-->
-
                                         <q-fab-action color="skypay-primary" size="10px"
                                                       @click="editItem(cell.data)"
                                                       icon="edit" />
@@ -146,9 +113,6 @@
                         <q-btn color="skypay-secondary" @click="showItems = false" label="Close">
                             Закрыть
                         </q-btn>
-                        <!--<q-btn color="skypay-secondary" flat @click="closeModal" label="Close">
-                        Отмена
-                    </q-btn>-->
                     </div>
                 </div>
                 <q-inner-loading :visible="itemvisible">
@@ -163,30 +127,17 @@
                     Добавление продукта
                 </p>
                 <div class=" pad" style="padding-bottom:10px">
-                    <!--:error="$v.terms.$error"
-                        @blur="$v.item.addQty.$touch" :error="$v.item.addQty.$error"
-                        -->
-                    <q-search v-model="terms" :error="$v.terms.$error"  placeholder="Выбор продукта" color="skypay-primary">
+                    <q-search v-model="terms" :error="$v.terms.$error" placeholder="Выбор продукта" color="skypay-primary">
                         <q-autocomplete :filter="filterProducts" :static-data="{field: 'value', list: productList}" @selected="selectProduct" />
                     </q-search>
                     <div class="row">
                         <div class="col" style="margin-right:10px">
                             <q-field>
 
-                                <q-input v-model="item.addQty"  @blur="$v.item.addQty.$touch" :error="$v.item.addQty.$error"  float-label="Количество" placeholder="" color="skypay-primary" />
+                                <q-input v-model="item.addQty" @blur="$v.item.addQty.$touch" :error="$v.item.addQty.$error" float-label="Количество" placeholder="" color="skypay-primary" />
                             </q-field>
                         </div>
-                        <!--<div class="col"></div>-->
-                        <!--<div class="col">
-                            <q-field>
-
-                                <q-input v-model="item.inputPrice" @blur="$v.item.inputPrice.$touch" :error="$v.item.inputPrice.$error" float-label="Закупочная цена" placeholder="" color="skypay-primary" />
-                            </q-field>
-                        </div>-->
                     </div>
-
-
-
                     <div style="position:absolute;bottom:10px">
                         <q-btn color="skypay-secondary" @click="saveItem" label="Close">
                             Ok
@@ -434,7 +385,6 @@
                 this.addEditItems = true
             },
             editItems: async function (data) {
-                //this.mvisible = false
                 this.showItems = true
                 this.itemvisible = true
                 let id = data.Id
@@ -452,7 +402,6 @@
             editItem: function (id) {
                 this.selectedItem = this.items.find(z => z.Id == id)
                 this.item.addQty = this.selectedItem.Qty
-                //this.item.inputPrice = this.selectedItem.InputPrice
                 this.selectedProduct = this.selectedItem.Product
                 this.terms = this.selectedItem.Product.Name
                 this.itemAction = 'edit'
@@ -469,7 +418,7 @@
                     this.pvisible = true
                     switch (this.itemAction) {
                         case 'add':
-                            let _item = { id: 0, DocumentId: this.selectedDocument.Id, ProductId: this.selectedProduct.Id, Qty: this.item.addQty, OutputPrice: this.selectedProduct.OutputPrice, InputPrice:0 }
+                            let _item = { id: 0, DocumentId: this.selectedDocument.Id, ProductId: this.selectedProduct.Id, Qty: this.item.addQty, OutputPrice: this.selectedProduct.OutputPrice, InputPrice: 0 }
                             console.log(_item)
                             try {
                                 await api.documents.addItem(_item)
@@ -506,12 +455,7 @@
                 }
             },
             selectProduct: function (val) {
-                //console.log(val.Id)
-                //for (var i in this.productList) {
-                //    console.log(this.productList[i].Id + ';' + this.productList[i].label + ';' + this.productList[i].OutputPrice)
-                //}
                 this.selectedProduct = this.productList.find(p => p.Id == val.Id)
-                //console.log(this.selectedProduct.label)
             },
             filterProducts: function (terms, { field, list }) {
                 let _f = this.productList
@@ -519,42 +463,26 @@
                         p.barCode.toLowerCase().indexOf(terms) === 0 ||
                         p.vendorCode.toLowerCase().indexOf(terms) === 0
 
-                )
-                //console.log(_f.length)
+                    )
                 return _f
-
-                //this.productList
-                //    .filter(p => p.label.toLowerCase().indexOf(terms) === 0 ||
-                //        p.barCode.toLowerCase().indexOf(terms) === 0 ||
-                //        p.vendorCode.toLowerCase().indexOf(terms) === 0
-
-                //    )
             },
             addDocument: function () {
                 this.$v.agent.$reset()
-                //this.$v.selectedDocument.$reset()
 
                 this.action = 'addDoc'
                 this.selectedAgent = {}
-                //this.selectedDocument.makrkup = null
                 this.agent = ''
                 this.private = false
-                //let _agents = await api.agents.get(this.selectedCompanyId, 2)
-                //this.agents = _agents.map(function (el) { el.value = el.id, el.label = el.name; return el })
                 this.addEditDoc = true
 
             },
             editDocument: async function (id) {
-                //conso
                 this.$v.agent.$reset()
-                //this.$v.selectedDocument.$reset()
 
                 this.action = 'editDoc'
                 let _doc = this.documents.find(z => z.Id == id)
                 this.selectedDocument = _doc
                 this.private = _doc.Private
-                //let _agents = await api.agents.get(this.selectedCompanyId, 2)
-                //this.agents = _agents.map(function (el) { el.value = el.id, el.label = el.name; return el })
                 if (_doc.Private) {
                     this.selectedAgent = null
                     this.agent = 0
@@ -568,10 +496,8 @@
             },
             saveDoc: async function () {
                 this.$v.agent.$touch()
-                //this.$v.selectedDocument.$touch()
                 if (!this.$v.agent.$error) {
                     this.$v.agent.$reset()
-                    //this.$v.selectedDocument.$reset()
                     this.addEditDoc = false
                     this.tvisible = true
                     switch (this.action) {
@@ -585,7 +511,6 @@
                                 this.documents = this.computeDocs(docs)
                                 Toast.create.positive('Документ добавлен')
 
-                                //docs.map(function (el) { el.Number = el.Id; return el })
                             }
                             catch (error) {
                                 Toast.create.warning('Ошибка: ' + error)
@@ -647,7 +572,6 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //console.log(this.selectedProductId)
                                     this.itemvisible = true
 
                                     await api.documents.deleteItem(id)
@@ -655,7 +579,6 @@
                                     this.items = this.computeItems(this.selectedDocument, _items)
 
                                     this.itemvisible = false
-                                    //this.selectProduct(0);
                                     Toast.create.positive('Удален продукт ' + _item.Product.Name)
                                 }
                                 catch (error) {
@@ -677,7 +600,7 @@
                 this.selectedAgent = this.agents.find(z => z.id == val);
             },
             computeDocs: function (docs) {
-                return docs.map(function (el) { el.Number = el.Id; el.agentEx = { name: (el.Agent?el.Agent.Name:'Частное лицо'), private: el.Private }; el.lock = { locked: el.Locked, Id: el.Id }; return el })
+                return docs.map(function (el) { el.Number = el.Id; el.agentEx = { name: (el.Agent ? el.Agent.Name : 'Частное лицо'), private: el.Private }; el.lock = { locked: el.Locked, Id: el.Id }; return el })
             },
             changePrivate: function () {
                 this.private = !this.private
@@ -702,14 +625,12 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //this.tvisible = true
                                     await api.documents.lock(id)
 
                                     //
                                     let docs = await api.documents.get(this.selectedStockId, 'Out')
                                     this.documents = this.computeDocs(docs)
 
-                                    //this.tvisible = false
                                     Toast.create.positive('Утвержден документ № ' + _doc.Id)
                                 }
                                 catch (error) {
@@ -721,7 +642,6 @@
                 })
             },
             confirmDeleteDocument: function (id) {
-                //this.selectProduct(id);
                 let _doc = this.documents.find(z => z.Id == id)
                 Dialog.create({
                     title: 'Удаление документа',
@@ -736,18 +656,11 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //console.log(this.selectedProductId)
                                     this.tvisible = true
                                     await api.documents.delete(id)
-
-                                    //this.productsets = await api.productset.get(this.selectedCategoryId)
-                                    //
-                                    //this.$store.dispatch("deleteProduct", this.selectedProductId)
                                     let docs = await api.documents.get(this.selectedStockId, 'Out')
-                                    //this.documents = docs.map(function (el) { el.Number = el.Id; return el })
                                     this.documents = this.computeDocs(docs)
                                     this.tvisible = false
-                                    //this.selectProduct(0);
                                     Toast.create.positive('Удален документ № ' + _doc.Id)
                                 }
                                 catch (error) {
@@ -782,42 +695,22 @@
         },
         watch: {
             selectedStockId: async function () {
-                //this.tvisible = true
-                //this.productsets = await api.productset.get(this.selectedCategoryId)
                 let docs = await api.documents.get(this.selectedStockId, 'Out')
-                //this.documents = docs.map(function (el) { el.Number = el.Id; return el })
                 this.documents = this.computeDocs(docs)
 
-                //this.tvisible = false
             },
-            //private: function () {
-            //    if (this.private) {
-            //        this.agent = 0
-            //    }
-            //}
         },
-       
-        async created() {
-            //if (this.selectedCategoryId) {
-            //    //console.log('created:' + this.selectedCategoryId)
-            //    var ps = await api.productset.get(this.selectedCategoryId);
-            //    //console.log(ps)
-            //    if (ps.length > 0)
-            //        this.productsets = ps;//await api.productset.get(this.selectedCategoryId)
-            //}
 
-            //this.documents = await api.agents.get(this.selectedCompanyId, this.viewType)
+        async created() {
             this.tvisible = true;
             this.stockProducts = await api.products.getStockProducts(this.selectedStockId)
             this.productList = this.stockProducts.map((el) => { return { Id: el.Product.Id, value: el.Product.Name, label: el.Product.Name, sublabel: 'Штрихкод:' + el.Product.BarCode, barCode: el.Product.BarCode, vendorCode: el.Product.VendorCode, OutputPrice: el.OutputPrice } })
-            //console.log(_productList)
             let _agents = await api.agents.get(this.selectedCompanyId, 1)
             this.agents = _agents.map(function (el) { el.value = el.id, el.label = el.name; return el })
             this.agents.push({ value: 0, label: 'Частное лицо' })
             let docs = await api.documents.get(this.selectedStockId, 'Out')
             this.documents = this.computeDocs(docs)
             this.tvisible = false
-            //docs.map(function (el) { el.Number = el.Id; el.lock = { locked: el.Locked, Id: el.Id }; return el })
 
         },
         components: {
@@ -842,6 +735,6 @@
     .money::after {
         content: "\20bd";
         font-style: normal;
-        margin-left:4px
+        margin-left: 4px
     }
 </style>

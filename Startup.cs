@@ -39,10 +39,8 @@ namespace SkyPay
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             var cs = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -71,11 +69,10 @@ namespace SkyPay
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             var provider = app.ApplicationServices.GetService<IServiceProvider>();
-            var model = GetEdmModel(/*provider*/app.ApplicationServices);
+            var model = GetEdmModel(app.ApplicationServices);
             //
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -115,17 +112,7 @@ namespace SkyPay
 
             app.UseMvc(routes =>
             {
-            //ODataUriResolver resolver = new ODataUriResolver();
-            //resolver = new StringAsEnumResolver();
-            routes.MapODataServiceRoute("odataroute", "odata",
-
-                     model
-                    //builder => builder
-                    //.AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => model)
-                    //.AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => ODataRoutingConventions.CreateDefaultWithAttributeRouting("odataroute", routes))
-                    //.AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => resolver)
-                
-                );
+            routes.MapODataServiceRoute("odataroute", "odata", model);
                 routes.MapRoute(
                     name: "spa",
                     template: "Manage/{link?}", defaults: new { controller = "Manage", action = "Index" });
@@ -136,14 +123,7 @@ namespace SkyPay
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
-                routes.EnableDependencyInjection(
-
-                    //builder =>
-                    //{
-                    //    builder
-                    //    .AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => new StringAsEnumResolver());
-                    //}
-                        );
+                routes.EnableDependencyInjection();
                 routes.Count().Expand().Filter().OrderBy().Select().MaxTop(null);
 
             });
@@ -153,7 +133,7 @@ namespace SkyPay
             var builder = new ODataConventionModelBuilder(service, true);
             builder.AddEnumType(typeof(CompanyType));
             //builder.EntitySet<User>("Users");
-            builder.EntitySet<Company>("Companies");//.EntityType.Expand(SelectExpandType.Automatic);
+            builder.EntitySet<Company>("Companies");
             builder.EntitySet<Category>("Categories");
             builder.EntitySet<Unit>("Units");
             builder.EntitySet<Product>("Products");
@@ -161,7 +141,6 @@ namespace SkyPay
             builder.EntitySet<CategoryProps>("CategoryProps");
             builder.EntitySet<Document>("Documents");
             builder.EntitySet<DocumentItem>("DocumentItems");
-            //builder.EnumType< CompanyType >
             return builder.GetEdmModel();
         }
     }

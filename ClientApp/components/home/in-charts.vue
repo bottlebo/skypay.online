@@ -1,12 +1,10 @@
 <template>
     <div style=" height:100%">
-       
+
         <div>
             <div class="chart-holder">
-                <!--<keep-alive>-->
-                    <component :is="currentChartName"></component>
-                    <!--</keep-alive>-->
-</div>
+                <component :is="currentChartName"></component>
+            </div>
 
         </div>
     </div>
@@ -31,30 +29,16 @@
                 currentChartName: "currentChartName"
             })
         },
-        //watch: {
-        //    currentChartView: function () {
-        //        console.log('***')
-        //        if (this.currentChartView == 'InCharts')
-        //            this.renderChart(this.chartData, this.options)
-
-        //    }
-        //},
         components: {
-            QBtn, DoughChart,BarChart
+            QBtn, DoughChart, BarChart
         },
-        //created() {
-        //    console.log('in created')
-        //}
     }
 </script>
 <style>
     .chart-holder {
         position: relative;
-        width:60%
+        width: 60%
     }
-
         .chart-holder canvas {
-            /*height: 500px !important;
-            width: 500px !important*/
         }
 </style>

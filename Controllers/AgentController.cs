@@ -29,24 +29,21 @@ namespace SkyPay.Controllers
         public IQueryable<Agent> Get()
         {
 
-            return _context.Agents;//.AsQueryable();
+            return _context.Agents;
         }
         [HttpGet]
         [Route("Agents/{type}")]
         [EnableQuery]
         public IQueryable<Agent> Get([FromODataUri] string type)
         {
-            //System.Threading.Thread.Sleep(3000);
 
             var t = (int)Enum.Parse(typeof(CompanyType), type);
-            return _context.Agents.Where(z => (int)z.Type == t);//.AsQueryable();
+            return _context.Agents.Where(z => (int)z.Type == t);
         }
         [HttpPost]
         [Route("Agents")]
         public async Task<IActionResult> Post([FromBody]Agent agent)
         {
-            //System.Threading.Thread.Sleep(3000);
-
             try
             {
                 await _context.AddAsync(agent);
@@ -63,8 +60,6 @@ namespace SkyPay.Controllers
         [Route("Agents({key})")]
         public async Task<IActionResult> Put([FromODataUri] int key, [FromBody]Agent agent)
         {
-            //System.Threading.Thread.Sleep(3000);
-
             var existingAgent = await _context.Agents.FindAsync(key);
             if (existingAgent == null)
             {
@@ -89,12 +84,11 @@ namespace SkyPay.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(key);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e);
 
             }
-
         }
     }
 }

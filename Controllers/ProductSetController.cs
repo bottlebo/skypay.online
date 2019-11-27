@@ -25,8 +25,7 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public IQueryable<ProductSet> Get()
         {
-            //System.Threading.Thread.Sleep(3000);
-            return _context.ProductsSets;//.AsQueryable();
+            return _context.ProductsSets;
         }
         [HttpGet]
         [Route("ProductSet({key})")]
@@ -39,11 +38,6 @@ namespace SkyPay.Controllers
                 return null;
             }
             var productset = _context.ProductsSets.Where(m => m.Id == key);
-
-            //if (product == null)
-            //{
-            //    return null;
-            //}
 
             return SingleResult.Create(productset);
         }
@@ -84,7 +78,6 @@ namespace SkyPay.Controllers
         [Route("ProductSet({key})")]
         public async Task<IActionResult> Put([FromODataUri] int key, [FromBody]ProductSet productset)
         {
-            //System.Threading.Thread.Sleep(3000);
             var existingProductSet = await _context.ProductsSets.FindAsync(key);
             if (existingProductSet == null)
             {
@@ -110,7 +103,6 @@ namespace SkyPay.Controllers
         [Route("ProductSet({key})")]
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             var existingProductSet = await _context.ProductsSets.FindAsync(key);
             if (existingProductSet == null)
             {
@@ -124,7 +116,7 @@ namespace SkyPay.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(key);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e);
             }
@@ -134,7 +126,6 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public IQueryable<ProductSetItem> GetProductProps([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             return _context.ProductsSetItems.Where(c => c.ProductSet.Id == key);
 
         }
@@ -142,8 +133,6 @@ namespace SkyPay.Controllers
         [Route("ProductSet({key})/AddProduct")]
         public async Task<IActionResult> Post([FromODataUri] int key, [FromBody]ProductSetItem item)
         {
-            //System.Threading.Thread.Sleep(3000);
-
             var productSet = await _context.ProductsSets.FindAsync(key);
             item.Product = await _context.Products.FindAsync(item.ProductId);
 
@@ -167,7 +156,6 @@ namespace SkyPay.Controllers
         [Route("ProductSetItem({key})")]
         public async Task<IActionResult> DeleteItem([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
 
             var item = await _context.ProductsSetItems.FindAsync(key);
             if (item == null)

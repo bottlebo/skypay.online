@@ -26,8 +26,6 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public IQueryable<DocumentItem> Get()
         {
-            //System.Threading.Thread.Sleep(3000);
-
             return _context.DocumentItems;//.AsQueryable();
         }
         [HttpGet]
@@ -35,27 +33,13 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public SingleResult<DocumentItem> Get([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return null;
-            //}
-
             var _item = _context.DocumentItems.Where(m => m.Id == key);
-
-            //if (company == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(_item);
         }
         [HttpPost]
         [Route("DocumentItem")]
         public async Task<IActionResult> Post([FromBody]DocumentItem item)
         {
-            //System.Threading.Thread.Sleep(3000);
             try
             {
                 await _context.DocumentItems.AddAsync(item);
@@ -72,7 +56,6 @@ namespace SkyPay.Controllers
         [Route("DocumentItem({key})")]
         public async Task<IActionResult> Update([FromODataUri] int key, [FromBody]DocumentItem item)
         {
-            //System.Threading.Thread.Sleep(3000);
             var existingItem = await _context.DocumentItems.FindAsync(key);
             if (existingItem == null)
             {
@@ -97,7 +80,6 @@ namespace SkyPay.Controllers
         [Route("DocumentItem({key})")]
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             var existingItem = await _context.DocumentItems.FindAsync(key);
             if (existingItem == null)
             {

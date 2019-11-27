@@ -10,7 +10,7 @@ using SkyPay.Models;
 using Microsoft.AspNet.OData;
 namespace SkyPay.Controllers
 {
-    
+
     [Produces("application/json")]
     [Route("odata")]
     public class UnitController : Controller
@@ -28,7 +28,7 @@ namespace SkyPay.Controllers
         public IQueryable<Unit> Get()
         {
 
-            return _context.Units;//.AsQueryable();
+            return _context.Units;
         }
         [HttpGet]
         [Route("Units({key})")]
@@ -42,14 +42,8 @@ namespace SkyPay.Controllers
             }
 
             var unit = _context.Units.Where(m => m.Id == key);
-
-            //if (unit == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(unit);
         }
     }
-    
+
 }

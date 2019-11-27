@@ -71,9 +71,6 @@
                 this.$data._chart.update()
             }
         },
-        //created() {
-        //    console.log('* chart created')
-        //},
         async mounted() {
             let _data = []
             if (this.currentChartView == 'InCharts') {
@@ -91,31 +88,6 @@
                 this.chartData.labels.push(_data[i].date)
                 this.chartData.datasets[0].data.push(_data[i].value)
             }
-
-
-
-
-
-
-
-
-
-
-
-            //let _data = await api.reports.byValue();
-
-            //this.chartData.labels = []
-            //this.chartData.datasets[0].data = []
-            ////let _d = new Date()
-            //for (let i in _data) {
-            //    //console.log(_d)
-            //    this.chartData.labels.push(_data[i].date)
-            //    this.chartData.datasets[0].data.push(_data[i].value )
-            //}
-            //console.log('chart mount')
-            //for (let i in this.chartData.labels) {
-            //    console.log(this.chartData.labels[i])
-            //}
             this.renderChart(this.chartData, this.options)
         }
     }

@@ -1,10 +1,10 @@
 import * as types from '../mutation-types'
 const chartViews = [
-    { view: 'InCharts', charts: [{ name: 'DoughChart', data: 0 }, {name:'BarChart',data:0}] },
+    { view: 'InCharts', charts: [{ name: 'DoughChart', data: 0 }, { name: 'BarChart', data: 0 }] },
     { view: 'OutCharts', charts: [{ name: 'DoughChart', data: 0 }, { name: 'DoughChart', data: 1 }, { name: 'BarChart', data: 0 }] }
-    ]
+]
 const state = {
-    selectedViewIndex:0,
+    selectedViewIndex: 0,
     selectedChartIndex: 0
 
 }
@@ -15,7 +15,7 @@ const getters = {
 }
 const actions = {
     setView({ commit, state }, index) {
-            commit(types.SET_VIEW,  index  )
+        commit(types.SET_VIEW, index)
     },
     setChart({ commit, state }, index) {
         commit(types.SET_CHART, index)

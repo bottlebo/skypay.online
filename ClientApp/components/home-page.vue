@@ -12,7 +12,7 @@
                         <div class="col-7">{{item.stockName}}</div>
                         <div class="col-4" style="color: #fb6d9d; font-weight:500">{{format(item.amount)}} <i class="rub" /></div>
                     </div>
- 
+
                 </q-card-main>
             </q-card>
             <q-card class="pointer" inline style="width: 300px; background-color:white" @click="currentView=1;setChartIndex(0)">
@@ -33,7 +33,6 @@
         <div>
             <q-card style="min-height: 600px; background-color:white">
                 <q-card-title>
-                    <!--<span slot="subtitle">Продажи</span> #4d80f3-->
                     <div class="row">
                         <div class="col-1" style="">
                             <span v-if="currentChartView=='InCharts'" style="color:#fb6d9d;  font-weight:500">Запасы</span>
@@ -53,19 +52,7 @@
                 </q-card-title>
                 <q-card-separator />
                 <q-card-main>
-                    <!--<div class="row">
-                        <div class="col-7">Склад Игрушек №1</div>
-                        <div class="col-4" style="color: #fb6d9d; font-weight:500">60 000 <i class="rub" /></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-7">Склад Игрушек №1</div>
-                        <div class="col-4">60 000 руб</div>
-                    </div>-->
                     <component :is="currentView"></component>
-                    <!--<div style="clear:both; padding-bottom:20px">123</div>-->
-                    <!--<div class="chart-holder">
-                        <dough-chart :gorender="gor"  :options="chartOptions" style="max-height:450px"></dough-chart>
-                    </div>-->
                 </q-card-main>
             </q-card>
         </div>
@@ -86,7 +73,7 @@
                 gor: 0,
                 shortstock: { stockItems: [], total: 0 },
                 shortsale: { stockItems: [], total: 0 },
-                
+
             }
         },
 
@@ -98,48 +85,23 @@
                 get() { return this.currentChartView },
                 set(index) { this.setView(index) }
             },
-            //currentView: {},
             getByCategory: {
                 get() { return api.reports.byCategories() }
             }
-            //chart_data: function () {
-            //    return this.chartData
-            //   //return {
-            //   //     labels: [],
-            //   //         datasets: [
-            //   //             {
-            //   //                 label: 'GitHub Commits',
-            //   //                 backgroundColor: colors.reverse(),
-            //   //                 //['#61EFCD', '#CDDE1F', '#FEC200', '#CA765A', '#2485FA', '#F57D7D', '#C152D2', '#8854D9', '#3D4EB8', '#00BCD7'],// ['#f87979', '#00ff00', '#0000ff'],
-            //   //                 data: []
-            //   //             }
-            //   //         ]
-            //   // }
-            //}
         },
         async created() {
             this.shortstock = await api.reports.shortstock()
             this.shortsale = await api.reports.shortsale()
 
-            //console.log(this.shortstock.total)
             console.log('** created')
-            //this.setView(0)
         },
         async mounted() {
-            //console.log('** mounted')
-            //let _data = await api.reports.byCategories();
-
-            //this.chartData.labels = []
-            //this.chartData.datasets.data = []
-            //for (let i in _data) {
-            //    this.chartData.labels.push(_data[i].categoryName)
-            //    this.chartData.datasets[0].data.push(_data[i].amount)
-            //}
 
         },
         methods: {
             ...mapActions({
-                setView: "setView", setChart: "setChart" }),
+                setView: "setView", setChart: "setChart"
+            }),
             setChartIndex: function (val) {
                 this.setChart(val)
             },
@@ -158,5 +120,8 @@
         content: "\20bd";
         font-style: normal
     }
-    .pointer {cursor:pointer}
+
+    .pointer {
+        cursor: pointer
+    }
 </style>

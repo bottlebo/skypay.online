@@ -27,7 +27,7 @@ namespace SkyPay.Controllers
         public IQueryable<ProductProps> Get()
         {
 
-            return _context.ProductProps;//.AsQueryable();
+            return _context.ProductProps;
         }
         [HttpGet]
         [Route("ProductProps({key})")]
@@ -41,12 +41,6 @@ namespace SkyPay.Controllers
             }
 
             var props = _context.ProductProps.Where(m => m.Id == key);
-
-            //if (unit == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(props);
         }
     }

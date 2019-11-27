@@ -1,9 +1,6 @@
 <template>
     <div style="padding:20px; position:relative">
         <div>
-            <!--<q-btn color="skypay-primary" round flat small @click="addProductSet">
-                <q-icon name="add" />
-            </q-btn>-->
         </div>
         <div class="relative-position">
             <div class="row" style="padding-bottom:10px">
@@ -13,24 +10,11 @@
                     </q-btn>
                 </div>
                 <div class="col-3">
-                    <!--<q-select v-model="viewType" stack-label="Показывать:"
-                              color="skypay-primary"
-                              @change="changeViewType"
-                              :options="viewTypes" />-->
                 </div>
                 <div class="col"></div>
                 <div class="col-5" style="padding-top:11px">
-                    <!--<q-search color="skypay-primary"
-                              @keyup="keyUpSearch"
-                              @change="changeSearch"
-                              placeholder="Поиск"
-                              v-model="agentsearch" />-->
                 </div>
             </div>
-            <!--<q-search v-model="terms" placeholder="Выбор продукта">
-                <q-autocomplete :filter="filterProducts" :static-data="{field: 'value', list: productList}" @selected="selectProduct" />
-            </q-search>-->
-
             <q-data-table :data="documents"
                           :config="config"
                           :columns="columns" class="tav">
@@ -49,11 +33,6 @@
                         <q-icon name="lock_open" size="18px" />
                     </q-btn>
                     <q-icon v-else name="lock" style="margin:0 11px;" color="skypay-primary" size="18px" />
-                    <!--<q-btn color="skypay-primary" flat small round @click="editAgent(cell.data)">
-                        <q-icon name="edit" size="18px" />
-                    </q-btn>
-                    -->
-
                 </template>
             </q-data-table>
             <q-inner-loading :visible="tvisible">
@@ -79,15 +58,11 @@
                                       :columns="item_columns" class="tav">
 
                             <template slot="col-Id" slot-scope="cell">
-                                
+
                                 <div class="tabcrud" style="padding-top:10px">
                                     <q-fab v-if="canEditItems" color="skypay-primary" flat small class="pull-right" style="margin-top:-10px!important"
                                            icon="more_horiz"
                                            direction="left">
-                                        <!--<q-fab-action color="skypay-primary"
-                                                       @click=""
-                                                      icon="add" />-->
-
                                         <q-fab-action color="skypay-primary" size="10px"
                                                       @click="editItem(cell.data)"
                                                       icon="edit" />
@@ -111,9 +86,6 @@
                         <q-btn color="skypay-secondary" @click="closeModal" label="Close">
                             Закрыть
                         </q-btn>
-                        <!--<q-btn color="skypay-secondary" flat @click="closeModal" label="Close">
-                            Отмена
-                        </q-btn>-->
                     </div>
                 </div>
                 <q-inner-loading :visible="itemvisible">
@@ -138,7 +110,6 @@
                                 <q-input v-model="item.addQty" @blur="$v.item.addQty.$touch" :error="$v.item.addQty.$error" float-label="Количество" placeholder="" color="skypay-primary" />
                             </q-field>
                         </div>
-                        <!--<div class="col"></div>-->
                         <div class="col">
                             <q-field>
 
@@ -235,7 +206,7 @@
                 selectedItem: {},
                 docvisible: false,
                 tvisible: false,
-                pvisible:false,
+                pvisible: false,
                 canEditItems: false,
                 selectedDocument: {},
                 companyProducts: [],
@@ -290,11 +261,6 @@
                     },
                     rowHeight: '50px',
                     responsive: true,
-                    //pagination: {
-                    //    rowsPerPage: 5,
-                    //    //options: [5, 10, 15, 30, 50, 500]
-                    //},
-                    //selection: 'none'
                     labels: {
                         rows: 'Строк',
                         columns: 'Coluuuuumns'
@@ -307,8 +273,6 @@
                         field: 'Number',
 
                         width: '5%',
-                        //filter: true
-                        //classes: 'col-7'
                     },
                     {
                         label: 'Дата',
@@ -367,8 +331,6 @@
                         field: 'InputPrice',
                         classes: 'money',
                         width: '12%',
-                        //filter: true
-                        //classes: 'col-7'
                     },
                     {
                         label: 'Цена продажи',
@@ -419,10 +381,6 @@
             ...mapGetters({ selectedStockId: "selectedStockId", selectedCompanyId: "selectedCompanyId" })
         },
         validations: {
-            //productset: {
-            //    name: { required },
-            //    barCode: { required }
-            //},
             item: {
                 addQty: { numeric, required },
                 inputPrice: { decimal, required }
@@ -455,7 +413,6 @@
                                     this.tvisible = true
                                     await api.documents.lock(id)
 
-                                    //
                                     let docs = await api.documents.get(this.selectedStockId, 'In')
                                     this.documents = this.computeDocs(docs)
 
@@ -472,7 +429,6 @@
             },
             selectProduct: function (val) {
                 this.selectedProduct = this.companyProducts.find(p => p.Id == val.Id)
-                //console.log(this.selectedProduct.Name)
             },
             filterProducts: function (terms, { field, list }) {
                 return this.productList
@@ -490,20 +446,15 @@
                 this.selectedAgent = {}
                 this.selectedDocument.makrkup = null
                 this.agent = ''
-                //let _agents = await api.agents.get(this.selectedCompanyId, 2)
-                //this.agents = _agents.map(function (el) { el.value = el.id, el.label = el.name; return el })
                 this.addEditDoc = true
             },
             editDocument: async function (id) {
-                //conso
                 this.$v.agent.$reset()
                 this.$v.selectedDocument.$reset()
 
                 this.action = 'editDoc'
                 let _doc = this.documents.find(z => z.Id == id)
                 this.selectedDocument = _doc
-                //let _agents = await api.agents.get(this.selectedCompanyId, 2)
-                //this.agents = _agents.map(function (el) { el.value = el.id, el.label = el.name; return el })
                 this.selectedAgent = this.agents.find(z => z.value == _doc.AgentId)
                 this.agent = this.selectedAgent.value
                 this.addEditDoc = true
@@ -604,7 +555,6 @@
             },
             closeModal: function () {
                 this.showItems = false;
-                //this.editCatName = '';
             },
             saveItems: function () {
                 this.showItems = false;
@@ -628,7 +578,6 @@
                                 this.documents = this.computeDocs(docs)
                                 Toast.create.positive('Документ добавлен')
 
-                                //docs.map(function (el) { el.Number = el.Id; return el })
                             }
                             catch (error) {
                                 Toast.create.warning('Ошибка: ' + error)
@@ -674,7 +623,6 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //console.log(this.selectedProductId)
                                     this.itemvisible = true
 
                                     await api.documents.deleteItem(id)
@@ -682,7 +630,6 @@
                                     this.items = this.computeItems(this.selectedDocument, _items)
 
                                     this.itemvisible = false
-                                    //this.selectProduct(0);
                                     Toast.create.positive('Удален продукт ' + _item.Product.Name)
                                 }
                                 catch (error) {
@@ -694,7 +641,6 @@
                 })
             },
             confirmDeleteDocument: function (id) {
-                //this.selectProduct(id);
                 let _doc = this.documents.find(z => z.Id == id)
                 Dialog.create({
                     title: 'Удаление документа',
@@ -709,18 +655,11 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //console.log(this.selectedProductId)
                                     this.tvisible = true
                                     await api.documents.delete(id)
-
-                                    //this.productsets = await api.productset.get(this.selectedCategoryId)
-                                    //
-                                    //this.$store.dispatch("deleteProduct", this.selectedProductId)
                                     let docs = await api.documents.get(this.selectedStockId, 'In')
-                                    //this.documents = docs.map(function (el) { el.Number = el.Id; return el })
                                     this.documents = this.computeDocs(docs)
                                     this.tvisible = false
-                                    //this.selectProduct(0);
                                     Toast.create.positive('Удален документ № ' + _doc.Id)
                                 }
                                 catch (error) {
@@ -741,24 +680,13 @@
         watch: {
             selectedStockId: async function () {
                 this.tvisible = true
-                //this.productsets = await api.productset.get(this.selectedCategoryId)
                 let docs = await api.documents.get(this.selectedStockId, 'In')
-                //this.documents = docs.map(function (el) { el.Number = el.Id; return el })
                 this.documents = this.computeDocs(docs)
 
                 this.tvisible = false
             }
         },
         async created() {
-            //if (this.selectedCategoryId) {
-            //    //console.log('created:' + this.selectedCategoryId)
-            //    var ps = await api.productset.get(this.selectedCategoryId);
-            //    //console.log(ps)
-            //    if (ps.length > 0)
-            //        this.productsets = ps;//await api.productset.get(this.selectedCategoryId)
-            //}
-
-            //this.documents = await api.agents.get(this.selectedCompanyId, this.viewType)
             this.tvisible = true;
             this.companyProducts = await api.products.getCompanyProducts(this.selectedCompanyId)
             this.productList = this.companyProducts.map((el) => { return { Id: el.Id, value: el.Name, label: el.Name, sublabel: 'Штрихкод:' + el.BarCode, barCode: el.BarCode, vendorCode: el.VendorCode } })
@@ -768,7 +696,6 @@
             let docs = await api.documents.get(this.selectedStockId, 'In')
             this.documents = this.computeDocs(docs)
             this.tvisible = false
-            //docs.map(function (el) { el.Number = el.Id; el.lock = { locked: el.Locked, Id: el.Id }; return el })
 
         },
         components: {
@@ -793,6 +720,7 @@
     .text-right {
         text-align: right
     }
+
     .tabcrud .q-btn-standard {
         height: 28px !important;
         width: 36px !important

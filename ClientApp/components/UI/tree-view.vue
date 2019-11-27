@@ -16,30 +16,17 @@
         },
         data() {
             return {
-                //treeData: this.model
             }
         },
         computed: {
-            //treeData: { get() { return this.model } }
         },
-        //watch: {
-        //    model: function () {
-        //        console.log('TREE')
-        //        console.log(this.model)
-        //    }
-        //},
         methods: {
             itemClick: function (e) {
-                //console.log(0)
                 this.$emit('itemClick', e)
             },
             treeData: function() {
                 return this.model
             }
         }
-        //,
-        //created() {
-        //    console.log('tree created')
-        //}
     }
 </script>

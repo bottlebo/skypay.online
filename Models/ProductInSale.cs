@@ -21,8 +21,6 @@ namespace SkyPay.Models
         //
         public decimal Qty { get; set; }
         public decimal OutputPrice { get; set; }
-        //
-        //public NdsValue nds { get; set; }
 
     }
 }

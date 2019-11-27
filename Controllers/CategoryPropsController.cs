@@ -26,7 +26,7 @@ namespace SkyPay.Controllers
         public IQueryable<CategoryProps> Get()
         {
 
-            return _context.CategoryProps;//.AsQueryable();
+            return _context.CategoryProps;
         }
         [HttpGet]
         [Route("CategoryProps({key})")]
@@ -40,12 +40,6 @@ namespace SkyPay.Controllers
             }
 
             var props = _context.CategoryProps.Where(m => m.Id == key);
-
-            //if (unit == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(props);
         }
         [HttpPost]
@@ -54,14 +48,12 @@ namespace SkyPay.Controllers
         {
             var _prop = new CategoryProps
             {
-                //Id = category.Id,
                 Name = prop.Name,
-                Type = prop.Type, categoryId = prop.categoryId
+                Type = prop.Type,
+                categoryId = prop.categoryId
             };
             var entity = await _context.CategoryProps.AddAsync(prop);
             await _context.SaveChangesAsync();
-            //_context.Categories.
-            //return Ok()
             return Created(Url.RouteUrl(prop.Id), prop.Id);
         }
     }

@@ -12,19 +12,16 @@ const getters = {
     selectedProductId: state => state.selectedProductId
 }
 const actions = {
-    //saveChildrens({ commit, state }, childrens) {
-    //    commit(types.RECEIVE_CHILDRENS, { childrens })
-    //},
     async getProducts({ commit, state, rootState }, categoryId) {
         return new Promise(function (resolve, reject) {
             if (state.all.length > 0 && rootState.categories.selectedCategoryId == state.currentCategoryId) {
 
-                resolve(state.all);//.find(s => s.companyId === companyId)
+                resolve(state.all);
             }
             else {
                 try {
                     axios
-                        .get(api.host +'/odata/Products?$filter=categoryId eq ' + rootState.categories.selectedCategoryId, { timeout: 10000 })
+                        .get(api.host + '/odata/Products?$filter=categoryId eq ' + rootState.categories.selectedCategoryId, { timeout: 10000 })
                         .then(function (response) {
                             let products = response.data.map(function (el) { el.n = el.id; return el })
                             commit(types.LOAD_PRODUCTS, { products })
@@ -34,7 +31,6 @@ const actions = {
                         .catch(function (error) {
                             reject(error)
                         });
-                    //return companies;
                 }
                 catch (e) {
                     //return null;
@@ -47,9 +43,9 @@ const actions = {
         return new Promise(function (resolve, reject) {
             try {
                 axios
-                    .get(api.host +'/odata/Products?$filter=categoryId eq ' + rootState.categories.selectedCategoryId, { timeout: 10000 })
+                    .get(api.host + '/odata/Products?$filter=categoryId eq ' + rootState.categories.selectedCategoryId, { timeout: 10000 })
                     .then(function (response) {
-                        let products = response.data.map(function (el) { el.n = el.id; return el})
+                        let products = response.data.map(function (el) { el.n = el.id; return el })
                         commit(types.LOAD_PRODUCTS, { products })
                         commit(types.PRODUCT_CATEGORY, { categoryId: rootState.categories.selectedCategoryId })
                         resolve(products)
@@ -57,10 +53,8 @@ const actions = {
                     .catch(function (error) {
                         reject(error);
                     });
-                //return companies;
             }
             catch (e) {
-                //return null;
                 reject(e)
             }
         })
@@ -70,7 +64,7 @@ const actions = {
         commit(types.ADD_PRODUCT, { product })
     },
     selectProduct({ commit, state }, id) {
-        commit(types.SELECT_PRODUCT, { productId: id /*state.all.filter(c => c.id == id)[0]*/ })
+        commit(types.SELECT_PRODUCT, { productId: id })
     },
     editProduct({ commit, state }, product) {
         commit(types.EDIT_PRODUCT, { product })
@@ -97,15 +91,10 @@ const mutations = {
         Object.keys(p).forEach(function (key) {
             p[key] = product[key]
         })
-        //for (let key in product) {
-        //    p[key] = product[key]
-        //}
-        //state.selectedProductId = productId
     },
     [types.DELETE_PRODUCT](state, { productId }) {
         let del = state.all.filter(p => p.id == productId)[0];
         let index = state.all.indexOf(del);
-        //cat.hasChild = true;
         state.all.splice(index, 1)
     }
 }

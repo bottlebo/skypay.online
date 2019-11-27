@@ -21,5 +21,4 @@ namespace SkyPay.Models
             return Name == p.Name && Type == p.Type;
         }
     }
-    //[NotMapped]
 }

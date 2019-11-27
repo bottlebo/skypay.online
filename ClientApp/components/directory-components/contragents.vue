@@ -1,10 +1,5 @@
 <template>
     <div style="padding:20px; position:relative">
-        <div>
-            <!--<q-btn color="skypay-primary" round flat small @click="addProductSet">
-                <q-icon name="add" />
-            </q-btn>-->
-        </div>
         <div class="relative-position">
             <div class="row" style="padding-bottom:10px">
                 <div class="col-2">
@@ -13,13 +8,10 @@
                     </q-btn>
                 </div>
                 <div class="col-3">
-                    <!--<q-field label="Показывать:">-->
-
                     <q-select v-model="viewType" stack-label="Показывать:"
                               color="skypay-primary"
                               @change="changeViewType"
                               :options="viewTypes" />
-                    <!--</q-field>-->
                 </div>
                 <div class="col"></div>
                 <div class="col-5" style="padding-top:11px">
@@ -30,10 +22,6 @@
                               v-model="agentsearch" />
                 </div>
             </div>
-            <!--<q-search v-model="terms" placeholder="Выбор продукта">
-                <q-autocomplete :filter="filterProducts" :static-data="{field: 'value', list: productList}" @selected="selectProduct" />
-            </q-search>-->
-
             <q-data-table :data="agents"
                           :config="config"
                           :columns="columns" class="tav">
@@ -110,7 +98,6 @@
                                 </q-field>
                                 <q-field>
                                     <q-datetime :month-names="month_names" :day-names="day_names" format="DD-MM-YYYY" ok-label="Ok" no-clear cancel-label="Отмена" v-model="agent.ogrnDate" type="date" float-label="Дата выдачи ОГРН" color="skypay-primary" />
-                                    <!--<q-input v-model="agent.ogrnDate" float-label="Дата выдачи ОГРН" color="skypay-primary" />-->
                                 </q-field>
                                 <q-field>
                                     <q-input v-model="agent.web" float-label="Вебсайт" color="skypay-primary" />
@@ -147,19 +134,12 @@
     import {
         QDataTable,
         QTabs, QTab, QTabPane, QField, QInput, QFab, QFabAction,
-        //QField,
-        //QInput,
-        //QCheckbox,
         QSelect, QCheckbox,
-        //QSlider,
         QInnerLoading,
         QSpinnerGears,
         QSpinnerMat,
         QBtn,
         QIcon, QModal, Dialog, Toast, QSearch, QAutocomplete, QDatetime
-        //QTooltip,
-        //QCollapsible,
-        //clone
     } from 'quasar-framework'
     export default {
         name: "product-sets",
@@ -171,16 +151,9 @@
                 viewType: 0,
                 addType: 1,
                 agentsearch: '',
-                //tablewait: false,
                 visible: true,
                 spvisible: false,
                 tvisible: false,
-                //terms: '',
-                //addQty: null,
-                //selectedProduct: null,
-                //companyProducts: [],
-                //productList: [],
-
                 config: {
                     title: '',
                     refresh: false,
@@ -195,80 +168,54 @@
                     responsive: true,
                     pagination: {
                         rowsPerPage: 5,
-                        //options: [5, 10, 15, 30, 50, 500]
                     },
-                    //selection: 'none'
                     labels: {
                         rows: 'Строк',
                         columns: 'Coluuuuumns'
                     }
                 },
                 columns: [
-                    //{
-                    //    label: 'id',
-                    //    field: 'id',
-                    //    width: '70px',
-                    //    //classes: 'bg-orange-2',
-                    //    //filter: true,
-                    //    //sort(a, b) {
-                    //    //    return (new Date(a)) - (new Date(b))
-                    //    //},
-                    //    //format(value) {
-                    //    //    return new Date(value).toLocaleString()
-                    //    //}
-                    //},
                     {
                         label: 'Наименование',
                         field: 'name',
-                      
+
                         width: '25%',
-                        //filter: true
-                        //classes: 'col-7'
                     },
                     {
                         label: 'ИНН',
                         field: 'inn',
-                        
+
                         width: '15%'
                     },
                     {
                         label: 'Контакт',
                         field: 'contact',
-                     
+
                         width: '15%'
-                        //classes: 'col-7'
                     },
                     {
                         label: 'Телефон',
                         field: 'phone',
-           
+
                         width: '15%'
-                        //classes: 'col-7'
                     },
                     {
                         label: 'E-mail',
                         field: 'email',
-            
+
                         width: '15%'
-                        //classes: 'col-7'
                     },
                     {
                         label: '',
                         field: 'id',
                         width: '15%'
-                        //classes: 'col-1'
                     }
                 ],
-                //pagination: true,
-                //rowHeight: 50,
-                //bodyHeightProp: 'maxHeight',
-                //bodyHeight: 500,
                 viewTypes: [{ label: 'Всех', value: 0, id: 0 }, { label: 'Покупателей', value: 'Bbuyer', id: 1 }, { label: 'Поставщиков', value: 'Shipper', id: 2 }],
                 addedit: false,
                 addTypes: [{ label: 'Покупателя', value: 1 }, { label: 'Поставщика', value: 2 }],
 
                 agents: [],
-                //[{ id: 1, name: 'Set 1', barCode: '111', vendorCode: '222' }, { id: 2, name: 'Set 2', barCode: '111', vendorCode: '222' }],
                 agent: {
                     id: 0,
                     name: '',
@@ -279,10 +226,6 @@
                 },
                 ndsVals: [{ label: 'Нет', value: 0 }, { label: '10%', value: 10 }, { label: '18%', value: 18 }],
                 sobVals: [{ label: 'ООО', value: 0 }, { label: 'ОАО', value: 1 }, { label: 'ИП', value: 2 }, { label: 'ЗАО', value: 3 }, { label: 'ГБОУ', value: 4 }, { label: 'ГБОУ ДОД', value: 5 }]
-
-                //, setitems: []
-
-
             }
         },
         computed: {
@@ -294,11 +237,6 @@
             }
         },
         watch: {
-            //selectedCategoryId: async function () {
-            //    this.tvisible = true
-            //    this.productsets = await api.productset.get(this.selectedCategoryId)
-            //    this.tvisible = false
-            //}
         },
         methods: {
             keyUpSearch: function (evt) {
@@ -315,92 +253,15 @@
                 this.agents = await api.agents.get(this.selectedCompanyId, this.viewType)
                 this.tvisible = false
             },
-            //addAgent: async function () {
-            //    this.$v.addQty.$touch()
-            //    this.$v.terms.$touch()
-
-            //    if (this.selectedProduct != null && !this.$v.addQty.$error) {
-            //        this.$v.addQty.$reset()
-            //        this.$v.terms.$reset()
-            //        switch (this.action) {
-            //            case 'edit':
-            //                this.tablewait = true;
-            //                let pr = { Id: 0, ProductId: this.selectedProduct.Id, Qty: this.addQty }
-            //                try {
-            //                    let id = await api.productset.addItem(this.productset.id, pr)
-            //                    this.setitems = await api.productset.getItems(this.productset.id)
-            //                    this.addQty = null;
-            //                    this.terms = ''
-            //                    this.selectedProduct = null
-            //                    Toast.create.positive('Продукт добавлен в набор')
-            //                }
-            //                catch (error) {
-            //                    Toast.create.warning('Ошибка: ' + error)
-            //                }
-            //                this.tablewait = false
-            //                break
-            //            case 'add':
-            //                let prn = { Id: 0, ProductId: this.selectedProduct.Id, Qty: this.addQty, Product: this.selectedProduct }
-            //                //console.log(this.selectedProduct.Name)
-            //                this.setitems.push(prn)
-            //                this.addQty = null;
-            //                this.terms = ''
-            //                this.selectedProduct = null
-            //                break
-            //        }
-            //    }
-            //    else {
-            //        Toast.create.warning('Необходимо выбрать продукт и количество')
-            //    }
-            //},
-            //filterProducts: function (terms, { field, list }) {
-            //    return this.productList
-            //        .filter(p => p.label.toLowerCase().indexOf(terms) === 0 ||
-            //            p.barCode.toLowerCase().indexOf(terms) === 0 ||
-            //            p.vendorCode.toLowerCase().indexOf(terms) === 0
-
-            //        )
-            //},
-
-            //selectProduct: function (val) {
-            //    this.selectedProduct = this.companyProducts.find(p => p.Id == val.Id)
-            //    //console.log(this.selectedProduct.Name)
-            //},
-            //editItem: function (id) {
-
-            //},
-            //deleteItem: async function (id) {
-            //    this.tablewait = true;
-            //    try {
-            //        await api.productset.deleteItem(id);
-            //        this.setitems = await api.productset.getItems(this.productset.id)
-            //        Toast.create.positive('Продукт удален')
-            //    }
-            //    catch (error) {
-            //        Toast.create.warning('Ошибка: ' + error)
-            //    }
-            //    this.tablewait = false;
-            //},
             editAgent: async function (id) {
                 this.action = 'edit'
-                //    this.visible = false;
-                //    this.spvisible = true;
                 this.addedit = true;
                 this.agent = this.agents.filter(c => c.id == id)[0];
-                //    this.setitems = await api.productset.getItems(this.productset.id)
-                //    this.visible = true;
-                //    this.spvisible = false;
-                //    //console.log(items)
-
             },
             addAgent: async function () {
                 this.addType = this.viewType == 0 ? 1 : this.viewTypes.find(z => z.value == this.viewType).id
                 this.$v.agent.$reset()
                 this.action = 'add'
-                //    this.visible = true;
-                //    this.spvisible = false;
-                //    this.productset = { id: 0, name: '', barCode: '', vendorCode: '', byCash: false, CategoryId: this.selectedCategoryId }
-
                 this.agent = {
                     id: 0, name: '', inn: '', kpp: '',
                     ogrn: '', ogrnDate: new Date(), sob: 0,
@@ -409,23 +270,19 @@
                     CompanyId: this.selectedCompanyId
                 }
 
-                //    this.setitems = [];
                 this.addedit = true;
             },
             closeModal: function () {
                 this.addedit = false;
-                //this.editCatName = '';
             },
             saveAgent: async function () {
                 this.$v.agent.$touch()
                 if (!this.$v.agent.$error) {
                     this.$v.agent.$reset()
-                            this.spvisible = true;
+                    this.spvisible = true;
                     switch (this.action) {
                         case 'edit':
                             try {
-                                //let vt = this.viewTypes.find(z => z.value == this.viewType)
-                                //this.agent.Type = vt.id
                                 await api.agents.update(this.agent)
                                 Toast.create.positive('Контрагент обновлен')
                             }
@@ -448,7 +305,7 @@
                             }
                             break
                     }
-                            this.spvisible = false;
+                    this.spvisible = false;
                     this.addedit = false;
                 }
                 else {
@@ -456,68 +313,20 @@
                 }
             },
             confirmDeleteAgent: function (id) {
-                //    //this.selectProduct(id);
-                //    var productset = this.productsets.filter(c => c.id == id)[0];
-                //    Dialog.create({
-                //        title: 'Удаление набора',
-                //        message: `Будет удален набор: ${productset.name} !`,
-                //        buttons: [
-                //            {
-                //                label: 'Отмена',
-                //                color: 'skypay-secondary'
-                //            },
-                //            {
-                //                label: 'Удалить',
-                //                color: 'skypay-secondary',
-                //                handler: async () => {
-                //                    try {
-                //                        //console.log(this.selectedProductId)
-                //                        this.tvisible = true
-                //                        await api.productset.delete(id)
-
-                //                        this.productsets = await api.productset.get(this.selectedCategoryId)
-                //                        this.tvisible = false
-                //                        //this.$store.dispatch("deleteProduct", this.selectedProductId)
-
-                //                        //this.selectProduct(0);
-                //                        Toast.create.positive('Удален набор: ' + productset.name)
-                //                    }
-                //                    catch (error) {
-                //                        Toast.create.warning('Ошибка: ' + error)
-                //                    }
-                //                }
-                //            }
-                //        ]
-                //    })
             }
         },
         async created() {
-            //if (this.selectedCategoryId) {
-            //    //console.log('created:' + this.selectedCategoryId)
-            //    var ps = await api.productset.get(this.selectedCategoryId);
-            //    //console.log(ps)
-            //    if (ps.length > 0)
-            //        this.productsets = ps;//await api.productset.get(this.selectedCategoryId)
-            //}
-
             this.agents = await api.agents.get(this.selectedCompanyId, this.viewType)
-            //console.log(pl)
         },
         components: {
             QDataTable,
-            //QField,
-            //QInput,
-            //QCheckbox,
             QSelect,
-            //QSlider,
             QInnerLoading,
             QSpinnerGears,
             QSpinnerMat,
             QBtn, QDatetime,
             QIcon, QModal, QCheckbox,
             QTabs, QTab, QTabPane, QField, QInput, QFab, QFabAction, Dialog, Toast, QSearch, QAutocomplete
-            //QTooltip,
-            //QCollapsible
         }
     }
 </script>
@@ -529,7 +338,8 @@
     .hfield .q-field-label-inner > span {
         color: #3f98a6
     }
+
     .q-pagination button {
-        color: #3f98a6!important
+        color: #3f98a6 !important
     }
 </style>

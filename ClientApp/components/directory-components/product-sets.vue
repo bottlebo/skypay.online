@@ -13,13 +13,10 @@
     </div>
 </template>
 <script>
-    //import { mapActions, mapGetters } from 'vuex'
-    //import { TreeView } from '@syncfusion/ej2-navigations';
     export default {
         name: "productsets",
         data() {
             return {
-                //categorytree:null
             }
         }
     }

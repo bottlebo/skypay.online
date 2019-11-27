@@ -1,16 +1,12 @@
 <template>
     <div style="padding:20px; position:relative">
         <div style="padding-bottom:10px">
-            <q-btn color="skypay-primary"  @click="addProductSet"  v-ripple>
+            <q-btn color="skypay-primary" @click="addProductSet" v-ripple>
                 Добавить
             </q-btn>
-            
+
         </div>
         <div class="relative-position">
-            <!--<q-search v-model="terms" placeholder="Выбор продукта">
-                <q-autocomplete :filter="filterProducts" :static-data="{field: 'value', list: productList}" @selected="selectProduct" />
-            </q-search>-->
-
             <q-data-table :data="productsets"
                           :config="config"
                           :columns="columns" class="tav">
@@ -43,11 +39,11 @@
                             <q-tab-pane name="tab-21">
                                 <div class="row pad">
                                     <q-field class="col-6">
-                                        <q-input v-model="productset.name"   @blur="$v.productset.name.$touch" :error="$v.productset.name.$error" float-label="Наименование" color="skypay-primary" />
+                                        <q-input v-model="productset.name" @blur="$v.productset.name.$touch" :error="$v.productset.name.$error" float-label="Наименование" color="skypay-primary" />
                                     </q-field>
                                     <div class="col-6">
                                         <q-field class="">
-                                            <q-input v-model="productset.barCode"   @blur="$v.productset.barCode.$touch" :error="$v.productset.barCode.$error" float-label="Штрихкод" color="skypay-primary" />
+                                            <q-input v-model="productset.barCode" @blur="$v.productset.barCode.$touch" :error="$v.productset.barCode.$error" float-label="Штрихкод" color="skypay-primary" />
                                         </q-field>
                                     </div>
                                     <div class="col-6">
@@ -71,7 +67,7 @@
                                     <div class="col-4">
                                         <q-field>
 
-                                            <q-input v-model="addQty"  @blur="$v.addQty.$touch" :error="$v.addQty.$error" float-label=""  placeholder="Количество" color="skypay-primary" />
+                                            <q-input v-model="addQty" @blur="$v.addQty.$touch" :error="$v.addQty.$error" float-label="" placeholder="Количество" color="skypay-primary" />
                                         </q-field>
                                     </div>
                                     <div class="col-2">
@@ -85,9 +81,6 @@
                                                   :config="itemsconfig"
                                                   :columns="itemscolumns" class="tav">
                                         <template slot="col-Id" slot-scope="cell">
-                                            <!--<q-btn color="skypay-primary" flat small round @click="editItem(cell.data)">
-                                                <q-icon name="edit" size="18px" />
-                                            </q-btn>-->
                                             <q-btn color="skypay-primary" round small flat @click="deleteItem(cell.data)">
                                                 <q-icon name="delete" size="18px" />
                                             </q-btn>
@@ -129,30 +122,23 @@
     import {
         QDataTable,
         QTabs, QTab, QTabPane, QField, QInput, QFab, QFabAction,
-        //QField,
-        //QInput,
-        //QCheckbox,
         QSelect, QCheckbox,
-        //QSlider,
         QInnerLoading,
         QSpinnerGears,
         QSpinnerMat,
         QBtn,
         QIcon, QModal, Dialog, Toast, QSearch, QAutocomplete
-        //QTooltip,
-        //QCollapsible,
-        //clone
     } from 'quasar-framework'
     export default {
         name: "product-sets",
         data() {
             return {
-                form:{qty:''},
+                form: { qty: '' },
                 action: '',
                 tablewait: false,
                 visible: false,
                 spvisible: false,
-                tvisible:false,
+                tvisible: false,
                 terms: '',
                 addQty: null,
                 selectedProduct: null,
@@ -170,11 +156,6 @@
                     },
                     rowHeight: '30px',
                     responsive: true,
-                    //pagination: {
-                    //    rowsPerPage: 15,
-                    //    options: [5, 10, 15, 30, 50, 500]
-                    //},
-                    //selection: 'none'
                 },
                 itemscolumns: [
 
@@ -203,7 +184,7 @@
                     },
                     {
                         label: 'Количество',
-                        field: 'Qty',//product.barCode',
+                        field: 'Qty',
                         width: '20%',
                         //sort: true,
                         //type: 'number'
@@ -228,35 +209,11 @@
                     },
                     rowHeight: '50px',
                     responsive: true,
-                    //pagination: {
-                    //    rowsPerPage: 15,
-                    //    options: [5, 10, 15, 30, 50, 500]
-                    //},
-                    //selection: 'none'
                 },
                 columns: [
-                    //{
-                    //    label: 'id',
-                    //    field: 'id',
-                    //    width: '70px',
-                    //    //classes: 'bg-orange-2',
-                    //    //filter: true,
-                    //    //sort(a, b) {
-                    //    //    return (new Date(a)) - (new Date(b))
-                    //    //},
-                    //    //format(value) {
-                    //    //    return new Date(value).toLocaleString()
-                    //    //}
-                    //},
                     {
                         label: 'Наименование',
                         field: 'name',
-                        //format(value) {
-                        //    if (value === 'Informational') {
-                        //        return '<i class="material-icons text-positive" style="font-size: 22px">info</i>'
-                        //    }
-                        //    return value
-                        //},
                         width: '35%'
                         //classes: 'col-7'
                     },
@@ -284,14 +241,9 @@
                         //classes: 'col-1'
                     }
                 ],
-                //pagination: true,
-                //rowHeight: 50,
-                //bodyHeightProp: 'maxHeight',
-                //bodyHeight: 500,
                 types: [{ label: 'Текст', value: 1 }, { label: 'Птичка', value: 2 }, { label: 'Число', value: 3 }],
                 addedit: false,
                 productsets: [],
-                //[{ id: 1, name: 'Set 1', barCode: '111', vendorCode: '222' }, { id: 2, name: 'Set 2', barCode: '111', vendorCode: '222' }],
                 productset: { id: 0, name: '', barCode: '', vendorCode: '', byCash: false }
                 , setitems: []
 
@@ -304,10 +256,10 @@
         validations: {
             productset: {
                 name: { required },
-                barCode: { required}
+                barCode: { required }
             },
             addQty: { numeric, required },
-            terms: { required}
+            terms: { required }
         },
         watch: {
             selectedCategoryId: async function () {
@@ -320,7 +272,7 @@
             addProduct: async function () {
                 this.$v.addQty.$touch()
                 this.$v.terms.$touch()
-               
+
                 if (this.selectedProduct != null && !this.$v.addQty.$error) {
                     this.$v.addQty.$reset()
                     this.$v.terms.$reset()
@@ -343,7 +295,6 @@
                             break
                         case 'add':
                             let prn = { Id: 0, ProductId: this.selectedProduct.Id, Qty: this.addQty, Product: this.selectedProduct }
-                            //console.log(this.selectedProduct.Name)
                             this.setitems.push(prn)
                             this.addQty = null;
                             this.terms = ''
@@ -363,31 +314,8 @@
 
                     )
             },
-            //searchProduct: function (terms, done) {
-            //    //console.log(terms)
-            //    //console.log(this.productList
-            //    //    .filter(p => p.label.toLowerCase().indexOf(terms) === 0 ||
-            //    //        p.barCode.toLowerCase().indexOf(terms) === 0 ||
-            //    //        p.vendorCode.toLowerCase().indexOf(terms) === 0
-
-            //    //).length)
-            //    done(
-            //        this.productList
-            //            .filter(p => p.label.toLowerCase().indexOf(terms) === 0 ||
-            //                p.barCode.toLowerCase().indexOf(terms) === 0 ||
-            //                p.vendorCode.toLowerCase().indexOf(terms) === 0
-
-            //        )
-            //    )
-            //    // make an AJAX call
-            //    // then call done(Array results)
-
-            //    // DO NOT forget to call done! When no results or an error occured,
-            //    // just call with empty array as param. Example: done([])
-            //},
             selectProduct: function (val) {
                 this.selectedProduct = this.companyProducts.find(p => p.Id == val.Id)
-                //console.log(this.selectedProduct.Name)
             },
             editItem: function (id) {
 
@@ -413,8 +341,6 @@
                 this.setitems = await api.productset.getItems(this.productset.id)
                 this.visible = true;
                 this.spvisible = false;
-                //console.log(items)
-
             },
             addProductSet: async function () {
                 this.action = 'add'
@@ -426,7 +352,6 @@
             },
             closeModal: function () {
                 this.addedit = false;
-                //this.editCatName = '';
             },
             saveProductSet: async function () {
                 this.$v.productset.$touch()
@@ -463,7 +388,6 @@
                 }
             },
             confirmDeleteProductSet: function (id) {
-                //this.selectProduct(id);
                 var productset = this.productsets.filter(c => c.id == id)[0];
                 Dialog.create({
                     title: 'Удаление набора',
@@ -478,15 +402,11 @@
                             color: 'skypay-secondary',
                             handler: async () => {
                                 try {
-                                    //console.log(this.selectedProductId)
                                     this.tvisible = true
                                     await api.productset.delete(id)
-                                    
+
                                     this.productsets = await api.productset.get(this.selectedCategoryId)
                                     this.tvisible = false
-                                    //this.$store.dispatch("deleteProduct", this.selectedProductId)
-
-                                    //this.selectProduct(0);
                                     Toast.create.positive('Удален набор: ' + productset.name)
                                 }
                                 catch (error) {
@@ -500,16 +420,13 @@
         },
         async created() {
             if (this.selectedCategoryId) {
-                //console.log('created:' + this.selectedCategoryId)
                 var ps = await api.productset.get(this.selectedCategoryId);
-                //console.log(ps)
                 if (ps.length > 0)
-                    this.productsets = ps;//await api.productset.get(this.selectedCategoryId)
+                    this.productsets = ps;
             }
 
             this.companyProducts = await api.products.getCompanyProducts(this.selectedCompanyId)
             this.productList = this.companyProducts.map((el) => { return { Id: el.Id, value: el.Name, label: el.Name, sublabel: 'Штрихкод:' + el.BarCode, barCode: el.BarCode, vendorCode: el.VendorCode } })
-            //console.log(pl)
         },
         components: {
             QDataTable,

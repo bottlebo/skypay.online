@@ -11,10 +11,8 @@
             }
         },
         mounted() {
-            console.log('u m')
         },
         created() {
-            console.log('u c')
         }
     }
 </script>

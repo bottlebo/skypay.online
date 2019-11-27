@@ -28,7 +28,7 @@ namespace SkyPay.Models
         public decimal Total {
             get
             {
-                return 0;// Items.Count() == 0? 0 : Items.Sum(z => z.Summ);
+                return 0;
             }
         }
         [NotMapped]

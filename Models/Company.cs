@@ -8,7 +8,6 @@ namespace SkyPay.Models
 {
     public class Company : CompanyBase
     {
-        //[InverseProperty(nameof(Category.Company))]
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Agent> Agents { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
@@ -33,13 +32,9 @@ namespace SkyPay.Models
         [DataType(DataType.Date)]
 
         public DateTime? OgrnDate { get; set; }
-
-
-
         [Display(Name = "Форма собственности")]
         public sobType sob { get; set; }
 
-        //[StringLength(50)]
         [Display(Name = "Юридический дрес")]
         public string Address1 { get; set; }
 
@@ -47,7 +42,6 @@ namespace SkyPay.Models
         [StringLength(100)]
         [Display(Name = "Контактное лицо")]
         public string Contact { get; set; }
-        //[StringLength(50)]
         [Display(Name = "Фактический адрес")]
         public string Address { get; set; }
         [DataType(DataType.EmailAddress)]
@@ -58,9 +52,6 @@ namespace SkyPay.Models
         [Display(Name = "Адрес сайта")]
         public string web { get; set; }
 
-        //public string Photo { get; set; }
-
-        //[StringLength(15)]
         [Display(Name = "Телефон")]
         public string Phone { get; set; }
 

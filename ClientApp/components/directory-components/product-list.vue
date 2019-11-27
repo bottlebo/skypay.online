@@ -9,9 +9,6 @@
             <q-data-table :data="products"
                           :config="config"
                           :columns="columns" class="tav">
-                <!--@refresh="refresh"
-                @selection="selection"
-                @rowclick="rowClick"-->
                 <template slot="col-n" slot-scope="cell">
                     <q-icon class="dragabble" v-bind:data-n="cell.data" color="skypay-primary" name="arrow_back" size="18px" />
                 </template>
@@ -23,22 +20,6 @@
                         <q-btn color="skypay-primary" round small flat @click="confirmDeleteProduct(cell.data)">
                             <q-icon name="delete" size="18px" />
                         </q-btn>
-                        <!--<div class="relative-position"  style="overflow:visible">
-            <q-fab color="skypay-primary" small class="absolute-center" style="z-index:1000" direction="left" size="12px" flat icon="keyboard_arrow_up">
-                <q-fab-action color="skypay-primary"
-                               :offset="[20, 20]"
-                              @click="deleteProduct(cell.data)"
-                              icon="delete" />
-                <q-fab-action color="skypay-primary"
-                               :offset="[20, 20]"
-                              @click="editProduct(cell.data)"
-                              icon="edit" />
-
-            </q-fab>
-                </div>-->
-                        <!--<q-btn flat color="primary" @click="deleteRow(props)">
-                <q-icon name="delete" />
-            </q-btn>-->
                     </template>
 </q-data-table>
             <q-inner-loading :visible="visible">
@@ -59,11 +40,6 @@
                             <q-tab color="skypay-primary" slot="title" name="tab-2" label="Характеристики" />
                             <q-tab color="skypay-primary" slot="title" name="tab-3" label="Модификация" />
 
-                            <!--<q-route-tab v-for="route in dirroutes" :label="route.display"
-                            :to="route.path"
-                            exact
-                            slot="title"
-                             color="skypay-primary" />-->
                             <q-tab-pane name="tab-1">
                                 <div class="row pad">
                                     <q-field class="col-6">
@@ -177,25 +153,17 @@
     import {
         QDataTable,
         QTabs, QTab, QTabPane, QField, QInput, QFab, QFabAction,
-        //QField,
-        //QInput,
-        //QCheckbox,
         QSelect, QCheckbox,
-        //QSlider,
         QInnerLoading,
         QSpinnerGears,
         QSpinnerMat,
         QBtn,
         QIcon, QModal, Dialog, Toast, QCard, QCardTitle, QCardMain
-        //QTooltip,
-        //QCollapsible,
-        //clone
     } from 'quasar-framework'
     export default {
         name: "product-list",
         data() {
             return {
-                //productgrid: null,
                 mvisible: false, spvisible: false,
                 product: { id: 0, name: '', barCode: '', vendorCode: '', weighing: false, categoryId: null, unitId: null },
                 visible: false, addedit: false, action: '', cprops: [], pprops: [], addPropName: '', addPropType: null,
@@ -211,74 +179,39 @@
                     },
                     rowHeight: '50px',
                     responsive: true,
-                    //pagination: {
-                    //    rowsPerPage: 15,
-                    //    options: [5, 10, 15, 30, 50, 500]
-                    //},
-                    //selection: 'none'
                 },
                 columns: [
-                    //{
-                    //    label: 'id',
-                    //    field: 'id',
-                    //    width: '70px',
-                    //    //classes: 'bg-orange-2',
-                    //    //filter: true,
-                    //    //sort(a, b) {
-                    //    //    return (new Date(a)) - (new Date(b))
-                    //    //},
-                    //    //format(value) {
-                    //    //    return new Date(value).toLocaleString()
-                    //    //}
-                    //},
                     {
                         label: '',
                         field: 'n',
                         width: '5%'
-                        //classes: 'col-1'
                     },
                     {
                         label: 'Наименование',
                         field: 'name',
-                        //format(value) {
-                        //    if (value === 'Informational') {
-                        //        return '<i class="material-icons text-positive" style="font-size: 22px">info</i>'
-                        //    }
-                        //    return value
-                        //},
-                        //classes: 'dragabble',
                         width: '33%'
-                        //classes: 'col-7'
                     },
                     {
                         label: 'Штрихкод',
                         field: 'barCode',
                         width: '22%',
-                        //sort: true,
-                        //type: 'number'
-                        //classes:'col-2'
                     },
                     {
                         label: 'Артикул',
                         field: 'vendorCode',
-                        //filter: true,
-                        //sort: true,
-                        //type: 'string',
                         width: '18%'
-                        //classes: 'col-2'
                     },
                     {
                         label: '',
                         field: 'id',
                         width: '15%'
-                        //classes: 'col-1'
                     }
                 ],
                 pagination: true,
                 rowHeight: 50,
                 bodyHeightProp: 'maxHeight',
                 bodyHeight: 500,
-                types: [{ label: 'Текст', value: 1 }, { label: 'Птичка', value: 2 }/*, { label: 'Число', value: 3 }*/]
+                types: [{ label: 'Текст', value: 1 }, { label: 'Птичка', value: 2 }]
 
             }
         },
@@ -296,7 +229,6 @@
             },
             units: {
                 get() {
-                    //console.log(api.units.get())
                     return api.units.get()
                 }
             }
@@ -316,10 +248,6 @@
                 this.visible = true;
                 await this.$store.dispatch("reloadProducts");
                 this.visible = false
-                //this.productgrid.dataSource = this.products
-                //this.productgrid.dataBind()
-                //this.productgrid.refresh()
-
             }
         },
         methods: {
@@ -333,12 +261,7 @@
                 if (!this.$v.addPropType.$error && !this.$v.addPropType.$error) {
                     let p = { id: 0, name: this.addPropName, type: this.addPropType, productId: this.currentProdictId, value: '' }
                     try {
-                        //let id = await api.addCategoryProperty(p)
-                        //p.id = id
                         this.pprops.push(p)
-                        //for (let i in this.props) {
-                        //    console.log(this.props[i].name + ';' + this.props[i].Type)
-                        //}
                         this.addPropName = ""
                         this.addPropType = 0
                     }
@@ -362,7 +285,6 @@
                 })
             },
             editProduct: async function (id) {
-                //console.log(id)
                 this.$v.product.$reset()
                 this.$v.addPropName.$reset()
                 this.$v.addPropType.$reset()
@@ -376,15 +298,12 @@
                 let props = await api.products.getProductCategoryProps(id)
                 this.cprops = this.mapBool(props.categoryProductProps)
                 this.pprops = this.mapBool(props.productProps)
-                //console.log(this.cprops)
-                //console.log(this.pprops)
                 var selp = this.getSelectedProduct();
                 var self = this
                 this.product = {}
                 Object.keys(selp).forEach(function (key) {
                     self.product[key] = selp[key]
                 })
-                //this.product = this.getSelectedProduct()
                 this.mvisible = true;
                 this.spvisible = false;
 
@@ -425,18 +344,10 @@
             },
             addProduct: async function () {
                 this.action = 'add'
-                //this.selectedProductId = 0;
-                //this.props = []
-                //this.editCatName = '';
                 this.mvisible = true;
                 this.spvisible = false
                 this.product = { id: 0, name: '', vendorCode: '', barCode: '', weighing: false, unitId: null, categoryId: this.selectedCategoryId }
-                let props = await /*api.products.getProductCategoryProps()*/ api.getCategoryProperties(this.selectedCategoryId)
-                //let p = [];
-                //for (let i in props) {
-                //    let prop = props[i]
-                //    p.push({ id: 0, name: prop.name, type: prop.type, value: null, productId: 0 })
-                //}
+                let props = await api.getCategoryProperties(this.selectedCategoryId)
                 this.$v.product.$reset()
                 this.$v.addPropName.$reset()
                 this.$v.addPropType.$reset()
@@ -461,8 +372,6 @@
 
                             this.$store.dispatch("addProduct", this.product);
                             Toast.create.positive('Продукт добавлен')
-                            //this.selectCategory(0)
-                            //this.selectCategory(this.selectedCategoryId)
                         }
                         catch (error) {
                             Toast.create.warning('Ошибка: ' + error)
@@ -470,21 +379,13 @@
                     }
                     else if (this.action == 'edit') {
                         try {
-                            //console.log(this.product.id)
                             let productext = {};
                             productext.Product = this.product
                             productext.ProductProps = this.pprops;
                             productext.CategoryProductProps = this.cprops
-                            //console.log(productext)
                             await api.products.update(productext)
-                            //let p = {};
-                            //var self = this
-                            //Object.keys(this.product).forEach(function (key) {
-                            // p['name'] = self.product.name;//[key]
-                            //})
                             this.$store.dispatch("editProduct", this.product);
                             Toast.create.positive('Продукт изменен')
-                            //console.log(p)
                         }
                         catch (error) {
                             Toast.create.warning('Ошибка: ' + error)
@@ -500,12 +401,10 @@
             },
             closeModal: function () {
                 this.addedit = false;
-                //this.editCatName = '';
             },
             handleDragStart(e) {
                 e.dataTransfer.effectAllowed = 'copy';
                 e.dataTransfer.setData('productId', e.target.getAttribute('data-n'));
-                //e.target.style.opacity = '0.4';  // this / e.target is the source node.
             }
         },
         mounted() {
@@ -515,39 +414,19 @@
                 col.setAttribute('draggable','true')
                 col.addEventListener('dragstart', self.handleDragStart, false);
             });
-            //this.productgrid = new Grid({
-            //    dataSource: this.products,
-            //    toolbar: ['add', 'edit', 'delete', 'print', 'excelexport', 'search'],
-            //    editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true },
-            //    columns: [
-            //        { field: 'id', headerText: 'ID', textAlign: 'left', width: 40, type: 'number' },
-            //        { field: 'Name', width: 140, headerText: 'Name', type: 'string' },
-            //        { headerText: 'Manage Records', width: 160, commands: [{ type: 'edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } }, { type: 'delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } }, { type: 'save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } }, { type: 'cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }] }
-            //        //{ field: 'Freight', headerText: 'Freight', textAlign: 'right', width: 120, format: 'C' },
-            //        //{ field: 'OrderDate', headerText: 'Order Date', width: 140, format: 'yMd' }
-            //    ],
-            //    height: 315
-            //});
-            //this.productgrid.appendTo('#productgrid')
         },
         async created() {
             await this.$store.dispatch("getProducts");
         },
         components: {
             QDataTable,
-            //QField,
-            //QInput,
-            //QCheckbox,
             QSelect,
-            //QSlider,
             QInnerLoading,
             QSpinnerGears,
             QSpinnerMat,
             QBtn,
             QIcon, QModal, QCheckbox,
             QTabs, QTab, QTabPane, QField, QInput, QFab, QFabAction, Dialog, Toast, QCard, QCardTitle, QCardMain
-            //QTooltip,
-            //QCollapsible
         },
     }
 </script>
@@ -557,7 +436,6 @@
     }
     [draggable] {
         -moz-user-select: none;
-        -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
         cursor: move

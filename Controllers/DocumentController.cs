@@ -26,19 +26,15 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public IQueryable<Document> Get()
         {
-            //System.Threading.Thread.Sleep(3000);
-
-            return _context.Documents;//.AsQueryable();
+            return _context.Documents;
         }
         [HttpGet]
         [Route("Documents/{type}")]
         [EnableQuery]
         public IQueryable<Document> Get([FromODataUri] string type)
         {
-            //System.Threading.Thread.Sleep(3000);
-
             var t = (int)Enum.Parse(typeof(DocumentType), type);
-            return _context.Documents.Where(z => (int)z.Type == t);//.AsQueryable();
+            return _context.Documents.Where(z => (int)z.Type == t);
         }
         [HttpGet]
         [Route("Documents({key})")]
@@ -53,10 +49,6 @@ namespace SkyPay.Controllers
 
             var document = _context.Documents.Where(m => m.Id == key);
 
-            //if (company == null)
-            //{
-            //    return null;
-            //}
 
             return SingleResult.Create(document);
         }
@@ -64,7 +56,6 @@ namespace SkyPay.Controllers
         [Route("Document")]
         public async Task<IActionResult> Post([FromBody]Document document)
         {
-            //System.Threading.Thread.Sleep(3000);
             try
             {
                 await _context.Documents.AddAsync(document);
@@ -81,7 +72,6 @@ namespace SkyPay.Controllers
         [Route("Documents({key})")]
         public async Task<IActionResult> Put([FromODataUri] int key, [FromBody]Document document)
         {
-            //System.Threading.Thread.Sleep(3000);
 
             var existingDoc = await _context.Documents.FindAsync(key);
             if (existingDoc == null)
@@ -108,15 +98,12 @@ namespace SkyPay.Controllers
         [Route("Document({key})/Lock")]
         public async Task<IActionResult> Put([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
 
             var existingDoc = await _context.Documents.Include(z => z.Items).Where(z => z.Id == key).SingleOrDefaultAsync();
-            //.FindAsync(key);
             if (existingDoc == null)
             {
                 return NotFound();
             }
-            //
             if (existingDoc.Type == DocumentType.In)
             {
                 try
@@ -152,9 +139,6 @@ namespace SkyPay.Controllers
                         }
                     }
 
-                    //var productsInStock = _context.ProductsInStock.Where(z=>z.ProductId == existingDoc.)
-
-                    //
                     await _context.SaveChangesAsync();
                     return Ok(key);
                 }
@@ -165,8 +149,6 @@ namespace SkyPay.Controllers
             }
             else
             {
-                //var productInSale = new ProductInSale();
-                //productInSale.StockId = existingDoc.StockId;
                 try
                 {
                     existingDoc.Locked = true;
@@ -188,14 +170,10 @@ namespace SkyPay.Controllers
                 }
             }
         }
-
-
-
         [HttpDelete]
         [Route("Document({key})")]
         public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             var existingDocument = await _context.Documents.FindAsync(key);
             if (existingDocument == null)
             {
@@ -215,15 +193,11 @@ namespace SkyPay.Controllers
 
             }
         }
-
-
-
         [HttpGet]
         [Route("Document({key})/DocumentItems")]
         [EnableQuery(MaxExpansionDepth = 3, AllowedQueryOptions = Microsoft.AspNet.OData.Query.AllowedQueryOptions.All)]
         public IQueryable<DocumentItem> GetDocumentItems([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             return _context.DocumentItems.Include(z => z.Product).Include(z => z.Product.Unit).Where(z => z.Document.Id == key);
         }
     }

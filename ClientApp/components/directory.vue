@@ -12,13 +12,6 @@
             <q-tab color="skypay-primary" slot="title" name="tab-4" label="Сотрудники" />
 
             <q-tab color="skypay-primary" slot="title" name="tab-5" label="Еденицы измерения" />
-
-            <!--<q-route-tab v-for="route in dirroutes" :label="route.display"
-                         :to="route.path"
-                         exact
-                         slot="title"
-                          color="skypay-primary" />-->
-
             <q-tab-pane name="tab-1">
 
                 <product-range></product-range>
@@ -40,7 +33,6 @@
 </template>
 <script>
 
-    //import { Toolbar } from '@syncfusion/ej2-navigations';
     import { routes } from '../routes'
     import Units from './directory-components/units'
     import Agents from './directory-components/contragents'
@@ -57,38 +49,17 @@
                 currentView: 'productrange'
             }
         },
-        //props: ['id'],
         methods: {
-            //tb_click: function (e) {
-            //    this.currentView = e.item.properties.htmlAttributes['component']
-            //}
         },
         computed: {
             dirroutes: function () {
                 return routes.filter(r => r.path == '/Manage/Directory')[0].children
             }
-            //currentCompanyId: {
-            //    get() {
-            //        if (this.$store.state.companies.selectedCompany)
-            //            return this.$store.state.companies.selectedCompany.id;
-            //        else
-            //            return null
-            //    }
-            //}
         },
-        //watch: {
-        //    '$route'(to, from) {
-        //        // обработка изменений параметров пути...
-        //        console.log(to)
-        //        console.log(this.$route.params.id)
-        //    }
-        //},
         mounted() {
 
         },
-        //},
         components: {
-            //productrange,
             ProductRange,
             Users,
             ProductSets,
@@ -103,9 +74,6 @@
     }
 </script>
 <style>
-    /*#container {
-        visibility: hidden;
-    }*/
     .pl-40 {
         margin-left: 50px
     }
@@ -123,11 +91,6 @@
         width: 30%;
     }
 
-    /*.e-content .e-item {
-        font-size: 12px;
-        margin: 10px;
-        text-align: justify;
-    }*/
 
     .container {
         min-width: 350px;

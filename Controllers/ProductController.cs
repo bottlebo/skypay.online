@@ -25,9 +25,7 @@ namespace SkyPay.Controllers
         [EnableQuery(MaxExpansionDepth = 3, AllowedQueryOptions = Microsoft.AspNet.OData.Query.AllowedQueryOptions.All)]
         public IQueryable<Product> Get()
         {
-            //System.Threading.Thread.Sleep(3000);
-
-            return _context.Products.Include(z=>z.Unit);//.AsQueryable();
+            return _context.Products.Include(z => z.Unit);
         }
         [HttpGet]
         [Route("Products({key})")]
@@ -40,12 +38,6 @@ namespace SkyPay.Controllers
                 return null;
             }
             var product = _context.Products.Include(z => z.Unit).Where(m => m.Id == key);
-
-            //if (product == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(product);
         }
         [HttpGet]
@@ -60,7 +52,6 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public ProductPropsExt GetProductCategoryProps([FromODataUri] int key)
         {
-            //System.Threading.Thread.Sleep(3000);
             var p = _context.Products.Find(key);
 
             var q = (from props in _context.CategoryProps
@@ -75,7 +66,6 @@ namespace SkyPay.Controllers
 
                          ProductId = p.Id
                      });
-            //.Union(
             var r = from props in _context.ProductProps
                     where props.ProductId == key
                     select new ProductProps
@@ -89,7 +79,6 @@ namespace SkyPay.Controllers
                     }
                      ;
             ;
-            //q.u
             var ext = new ProductPropsExt
             {
                 productId = key,
@@ -103,21 +92,7 @@ namespace SkyPay.Controllers
         [Route("Product")]
         public async Task<IActionResult> Post([FromBody]ProductExt productext)
         {
-            //var _category = new Category
-            //{
-            //    //Id = category.Id,
-            //    CategoryProps = category.CategoryProps,
-            //    Company = category.Company,
-            //    CompanyId = category.CompanyId,
-            //    HasChild = category.HasChild,
-            //    Name = category.Name,
-            //    parentId = category.parentId,
-            //    Products = category.Products
-            //};
             var entity = await _context.Products.AddAsync(productext.Product);
-            //var _parent = _context.Categories.Where(x => x.Id == category.parentId).SingleOrDefault();
-            //if (_parent != null)
-            //    _parent.HasChild = true;
             await _context.SaveChangesAsync();
             foreach (var props in productext.CategoryProductProps)
             {
@@ -148,8 +123,6 @@ namespace SkyPay.Controllers
             {
                 var er = e.Message;
             }
-            //_context.Categories.
-            //return Ok()
             return Created(Url.RouteUrl(productext.Product.Id), productext.Product.Id);
         }
         [HttpPut]
@@ -198,7 +171,6 @@ namespace SkyPay.Controllers
                     }
                 }
             }
-            //
             var pprops = await _context.ProductProps.Where(x => x.ProductId == productext.Product.Id).ToListAsync();
             foreach (var prop in pprops)
             {
@@ -239,7 +211,7 @@ namespace SkyPay.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(key);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var er = e.Message;
                 return BadRequest(e);

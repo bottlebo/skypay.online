@@ -25,9 +25,7 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public IQueryable<ProductInStock> Get()
         {
-            //System.Threading.Thread.Sleep(3000);
-
-            return _context.ProductsInStock;//.AsQueryable();
+            return _context.ProductsInStock;
         }
     }
 }

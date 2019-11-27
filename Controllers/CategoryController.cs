@@ -28,10 +28,8 @@ namespace SkyPay.Controllers
         public IQueryable<Category> Get()
         {
 
-            return _context.Categories;//.AsQueryable();
+            return _context.Categories;
         }
-
-        // GET: api/Products/5
         [HttpGet]
         [Route("Categories({key})")]
         [EnableQuery]
@@ -44,12 +42,6 @@ namespace SkyPay.Controllers
             }
 
             var category = _context.Categories.Where(m => m.Id == key);
-
-            //if (category == null)
-            //{
-            //    return null;
-            //}
-
             return SingleResult.Create(category);
         }
         [HttpGet]
@@ -57,9 +49,7 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public SingleResult<Company> GetCompany([FromODataUri] int key)
         {
-            //var _c = _context.Categories.Include(c=>c.Company).SingleOrDefault(c => c.Id == key).Company;
             var c = _context.Categories.Where(x => x.Id == key).Select(x => x.Company);
-            //return _context.Categories.Include(c => c.Company).SingleOrDefault(c => c.Id == key).Company;
             return SingleResult.Create(c);
         }
         [HttpGet]
@@ -67,9 +57,7 @@ namespace SkyPay.Controllers
         [EnableQuery]
         public async Task<List<CategoryProps>> GetProperties([FromODataUri] int key)
         {
-            //var _c = _context.Categories.Include(c=>c.Company).SingleOrDefault(c => c.Id == key).Company;
             var props = await _context.CategoryProps.Where(x => x.categoryId == key).ToListAsync();
-            //return _context.Categories.Include(c => c.Company).SingleOrDefault(c => c.Id == key).Company;
             ProductProps pr = new ProductProps
             {
                  
@@ -82,7 +70,6 @@ namespace SkyPay.Controllers
         {
             var _category = new Category
             {
-                //Id = category.Id,
                 CategoryProps = category.CategoryProps,
                 Company = category.Company,
                 CompanyId = category.CompanyId,
@@ -96,8 +83,6 @@ namespace SkyPay.Controllers
             if (_parent != null)
                 _parent.HasChild = true;
             await _context.SaveChangesAsync();
-            //_context.Categories.
-            //return Ok()
             return Created(Url.RouteUrl(category.Id), category.Id);
         }
         [HttpPut]
@@ -117,7 +102,6 @@ namespace SkyPay.Controllers
                 var c = category.CategoryProps.FirstOrDefault(x => x.Id == props.Id);
                 if (c == null)
                 {
-                    //existingCat.CategoryProps.Remove(props);
                     _context.Entry(props).State = EntityState.Deleted;
                 }
                 else if (!props.Equals(c))
